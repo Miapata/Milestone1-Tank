@@ -4,16 +4,10 @@ using UnityEngine;
 
 public class TankData : MonoBehaviour
 {
+    //These are the variables for the tank
     public float moveSpeed;
-
     public float rotateSpeed;
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    public float rateOfFire;
+
 }
