@@ -1734,7 +1734,7 @@ MonoBehaviour:
   missile: {fileID: 54069123774716568, guid: 8936a101c5b49aa4d8840c6ab6014672, type: 2}
   origin: {fileID: 1026025804}
   characterController: {fileID: 2120463242}
-  AI: 0
+  AI: 1
   tankData: {fileID: 2120463240}
 --- !u!143 &2120463242
 CharacterController:
