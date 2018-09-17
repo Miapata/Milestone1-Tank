@@ -22,18 +22,19 @@ public class Missile : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        //Ifthe collider is not null
+        // If the collider is not null
         if (other.collider != null && other.gameObject != gameObject)
         {
 
-            //Instantiate the explosion
+            // Instantiate the explosion
             Instantiate(explosion, transform.position, Quaternion.identity);
 
-            //Destroy the gameobject
+            // Destroy the gameobject
             Destroy(gameObject);
 
-            if (other.gameObject.tag == "Tank")
+            if (other.gameObject.tag == "Tank") // Check if the tag is Tank
             {
+                // Apply damage using the method
                 other.gameObject.GetComponent<TankData>().ApplyDamage(damage);
             }
 

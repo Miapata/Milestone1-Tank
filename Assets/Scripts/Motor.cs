@@ -58,7 +58,7 @@ public class Motor : MonoBehaviour
         // check if we can fire
         if (Time.time >= nextEventTime)
         {
-            //Jesus Christ 
+    
             Instantiate(missile, origin.transform.position, Quaternion.LookRotation(transform.right)); // spawn the missile
             nextEventTime = Time.time + tankData.rateOfFire; // set the the time we can fire again
         }
