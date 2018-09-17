@@ -8,12 +8,13 @@ public class Missile : MonoBehaviour
     public Rigidbody rigidBody;
     public GameObject explosion;
     public float missileSpeed;
-	// Update is called once per frame
+    public float damage;
+    // Update is called once per frame
     void Start()
     {
 
         //After 10 seconds, destroy the missile
-        Destroy(gameObject,10);
+        Destroy(gameObject, 10);
 
         //Set the velocity to go straight
         rigidBody.velocity = transform.right * missileSpeed;
@@ -22,13 +23,20 @@ public class Missile : MonoBehaviour
     void OnCollisionEnter(Collision other)
     {
         //Ifthe collider is not null
-        if (other.collider != null)
+        if (other.collider != null && other.gameObject != gameObject)
         {
+
             //Instantiate the explosion
             Instantiate(explosion, transform.position, Quaternion.identity);
 
             //Destroy the gameobject
             Destroy(gameObject);
+
+            if (other.gameObject.tag == "Tank")
+            {
+                other.gameObject.GetComponent<TankData>().ApplyDamage(damage);
+            }
+
         }
     }
 }

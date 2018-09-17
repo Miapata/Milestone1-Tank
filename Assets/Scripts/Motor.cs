@@ -4,9 +4,10 @@ using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Motor : MonoBehaviour {
+public class Motor : MonoBehaviour
+{
 
-    
+
     public Rigidbody missile; // Missile rigid body
     public GameObject origin; // The fire position
     public CharacterController characterController; // character controller
@@ -14,44 +15,45 @@ public class Motor : MonoBehaviour {
     public TankData tankData; // tank data to get the variables
     //Jesus
     private float nextEventTime; // used for the rate of fire
-	// Use this for initialization
-	void Start ()
-	{
-	    nextEventTime = Time.time; // set the time event
-	}
-	
-	// Update is called once per frame
-	void Update () {
+                                 // Use this for initialization
+    void Start()
+    {
+        nextEventTime = Time.time; // set the time event
+    }
 
-	    if (!AI)
-	    {
-	        // Here we get the vertical float 
-	        float vertical = Input.GetAxis("Vertical");
+    // Update is called once per frame
+    void Update()
+    {
 
-	        // The character cntroller moves using the speed
-	        characterController.SimpleMove(transform.forward * vertical * -tankData.moveSpeed);
+        if (!AI)
+        {
+            // Here we get the vertical float 
+            float vertical = Input.GetAxis("Vertical");
 
-
-	        // We get the horizontal speed 
-	        float horizontal = Input.GetAxis("Horizontal");
-
-	        // Using the speed we rotate the player
-	        transform.Rotate(Vector3.up, horizontal * tankData.rotateSpeed);
+            // The character cntroller moves using the speed
+            characterController.SimpleMove(transform.forward * vertical * -tankData.moveSpeed);
 
 
-	        // If the space key is pressed
-	        if (Input.GetKey(KeyCode.Space))
-	        {
+            // We get the horizontal speed 
+            float horizontal = Input.GetAxis("Horizontal");
 
-	            FireMissile(); // Fire the missile
-
-	        }
-	    }
+            // Using the speed we rotate the player
+            transform.Rotate(Vector3.up, horizontal * tankData.rotateSpeed);
 
 
+            // If the space key is pressed
+            if (Input.GetKey(KeyCode.Space))
+            {
 
-	}
-    void FireMissile()
+                FireMissile(); // Fire the missile
+
+            }
+        }
+
+
+
+    }
+    public void FireMissile()
     {
         // check if we can fire
         if (Time.time >= nextEventTime)

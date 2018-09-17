@@ -156,3 +156,4 @@ MonoBehaviour:
   rigidBody: {fileID: 54069123774716568}
   explosion: {fileID: 100006, guid: e076683e0305e35498b8e8834978c0fa, type: 2}
   missileSpeed: 80
+  damage: 50
