@@ -7,18 +7,30 @@ using UnityEngine.UI;
 public class Motor : MonoBehaviour
 {
 
+    // Missile rigid body
+    public Rigidbody missile;
 
-    public Rigidbody missile; // Missile rigid body
-    public GameObject origin; // The fire position
-    public CharacterController characterController; // character controller
-    public bool AI; // Check if the gameobject is an AI
-    public TankData tankData; // tank data to get the variables
+    // The fire position
+    public GameObject origin;
+
+    // character controller
+    public CharacterController characterController;
+
+    // Check if the gameobject is an AI
+
+    public bool AI;
+    // tank data to get the variables
+    public TankData tankData;
+
     //Jesus
-    private float nextEventTime; // used for the rate of fire
-                                 // Use this for initialization
+    // used for the rate of fire
+    private float nextEventTime; 
+
+   // Use this for initialization
     void Start()
     {
-        nextEventTime = Time.time; // set the time event
+        // set the time event
+        nextEventTime = Time.time; 
     }
 
     // Update is called once per frame
@@ -44,8 +56,8 @@ public class Motor : MonoBehaviour
             // If the space key is pressed
             if (Input.GetKey(KeyCode.Space))
             {
-
-                FireMissile(); // Fire the missile
+                // Fire the missile
+                FireMissile(); 
 
             }
         }
@@ -53,14 +65,17 @@ public class Motor : MonoBehaviour
 
 
     }
+
+    //FireMissile method
     public void FireMissile()
     {
         // check if we can fire
         if (Time.time >= nextEventTime)
         {
-    
-            Instantiate(missile, origin.transform.position, Quaternion.LookRotation(transform.right)); // spawn the missile
-            nextEventTime = Time.time + tankData.rateOfFire; // set the the time we can fire again
+            // spawn the missile
+            Instantiate(missile, origin.transform.position, Quaternion.LookRotation(transform.right));
+            // set the the time we can fire again
+            nextEventTime = Time.time + tankData.rateOfFire; 
         }
     }
 }

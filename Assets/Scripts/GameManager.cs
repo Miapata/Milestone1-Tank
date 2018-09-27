@@ -4,21 +4,27 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance; // instance
-    public TankData tankData; // Get the tank data
+    // instance
+    public static GameManager instance;
+
+    // Get the tank data
+    public TankData tankData; 
 
     void Awake()
     {
         // Destroy using the singleton pattern
         if (instance != null)
         {
-
-            Destroy(gameObject); // Destroy gameObject
+            // Destroy gameObject
+            Destroy(gameObject); 
         }
         else
         {
-            instance = this; // set instance to this
-            DontDestroyOnLoad(this);  // Don't destroy on load
+            // set instance to this
+            instance = this;
+
+            // Don't destroy on load
+            DontDestroyOnLoad(this);  
         }
     }
 

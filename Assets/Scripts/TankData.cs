@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class TankData : MonoBehaviour
 {
-    //These are the variables for the tank
+    //Move speed
     public float moveSpeed;
+
+    //Rotate speed
     public float rotateSpeed;
+
+    //Health
     public float health;
+
+    //Rate of Fire
     public float rateOfFire;
 
     // This method applys damage if we are hit
