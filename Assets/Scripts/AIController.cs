@@ -20,7 +20,9 @@ public class AIController : MonoBehaviour
     public float maxAngle;
 
 
-    public float maxRadius;
+    public float maxSightRadius;
+
+    public float maxHearingDistance;
 
     public enum Personalities
     {
@@ -59,6 +61,10 @@ public class AIController : MonoBehaviour
     // right angle to draw the FOV
     private Vector3 rightAngle;
 
+    private float hearingDistance;
+
+
+
     // Update is called once per frame
     void Update()
     {
@@ -77,6 +83,7 @@ public class AIController : MonoBehaviour
         //Check if the player is in the sight of our AI tank
         FOV();
 
+        Hearing();
     }
 
     // Move Method
@@ -145,8 +152,8 @@ public class AIController : MonoBehaviour
     {
 
         //Left angle to draw
-        leftAngle = Quaternion.AngleAxis(maxAngle / 2, transform.up) * -transform.forward * maxRadius;
-        rightAngle = Quaternion.AngleAxis(-maxAngle / 2, transform.up) * -transform.forward * maxRadius;
+        leftAngle = Quaternion.AngleAxis(maxAngle / 2, transform.up) * -transform.forward * maxSightRadius;
+        rightAngle = Quaternion.AngleAxis(-maxAngle / 2, transform.up) * -transform.forward * maxSightRadius;
 
         Debug.DrawRay(transform.position, leftAngle, Color.red);
         Debug.DrawRay(transform.position, rightAngle, Color.red);
@@ -156,6 +163,17 @@ public class AIController : MonoBehaviour
         {
             Debug.DrawLine(transform.position, tank.transform.position);
             print("Player in FOV");
+        }
+    }
+
+    void Hearing()
+    {
+
+        hearingDistance = Vector3.Distance(transform.position, tank.transform.position);
+
+        if (hearingDistance < maxHearingDistance)
+        {
+            print("Player is heard");
         }
     }
 }
