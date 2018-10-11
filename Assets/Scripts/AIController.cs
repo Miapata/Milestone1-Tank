@@ -153,11 +153,19 @@ public class AIController : MonoBehaviour
 
         //Left angle to draw
         leftAngle = Quaternion.AngleAxis(maxAngle / 2, transform.up) * -transform.forward * maxSightRadius;
+
+        //right angle
         rightAngle = Quaternion.AngleAxis(-maxAngle / 2, transform.up) * -transform.forward * maxSightRadius;
 
+        //Draw a ray for the left angle
         Debug.DrawRay(transform.position, leftAngle, Color.red);
+        //Draw a ray for the right angle
         Debug.DrawRay(transform.position, rightAngle, Color.red);
+
+        //direction 
         direction = (tank.transform.position - transform.position);
+
+        //angle
         angle = Vector3.Angle(direction, -transform.forward);
         if (angle < maxAngle * 0.5f)
         {
