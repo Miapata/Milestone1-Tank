@@ -146,16 +146,24 @@ public class AIController : MonoBehaviour
     void Chase()
     {
         //distnace float
-        float distance;
+        float distanceFromPlayer;
 
         //The distance from our player's position to our postition
-        distance = Vector2.Distance(tank.transform.position, transform.position);
+        distanceFromPlayer = Vector3.Distance(tank.transform.position, transform.position);
 
-        //Rotate the tank towards the player
-        Rotate(tank.transform.position);
+        if (distanceFromPlayer < 3)
+        {
+            //Rotate the tank towards the player
+            Rotate(tank.transform.position);
 
-        //Move towards the player
-        transform.position = Vector3.MoveTowards(transform.position, tank.transform.position, Time.deltaTime * tankData.moveSpeed);
+            //Move towards the player
+            transform.position = Vector3.MoveTowards(transform.position, tank.transform.position, Time.deltaTime * tankData.moveSpeed);
+        }
+        else
+        {
+            state = States.Patrolling;
+
+        }
     }
 
 
@@ -250,6 +258,9 @@ public class AIController : MonoBehaviour
             Debug.DrawLine(transform.position, tank.transform.position);
 
             print("Player in FOV");
+
+            //Rotate the tank towards the player
+            Rotate(tank.transform.position);
 
             //change state to chase
             state = States.Chase;
