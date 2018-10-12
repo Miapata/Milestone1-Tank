@@ -19,22 +19,44 @@ public class AIController : MonoBehaviour
     //The max FOV angle
     public float maxAngle;
 
+    //max fleeing distance
+    public float fleeingDistance;
 
+    //max sight
     public float maxSightRadius;
 
+    //max hearing
     public float maxHearingDistance;
 
     public enum Personalities
     {
         //Once in sight, he will constantly pursue you
         Chase,
+
         //Once in sight, he will flee and once far enough he will fire once and start patrolling
         Flee,
+
         //Has better range and will fire from afar
         Ranger,
+
         //Only fires when he is out of your view
         Sneak
     }
+
+    //Enum for our states
+    public enum States
+    {
+        //Move to waypoints
+        Patrolling,
+
+        //Chase the player
+        Chase,
+
+        //Flee from the player
+        Flee
+    }
+
+    public static States state;
 
     //index for the waypoint list
     public int wayPointIndex = 1;
@@ -61,9 +83,14 @@ public class AIController : MonoBehaviour
     // right angle to draw the FOV
     private Vector3 rightAngle;
 
+    //hearing distance
     private float hearingDistance;
 
-
+    private void Start()
+    {
+        //State is patrolling on start
+        state = States.Patrolling;
+    }
 
     // Update is called once per frame
     void Update()
@@ -74,20 +101,66 @@ public class AIController : MonoBehaviour
         // Distance between the target and current transform
         distance = Vector3.Distance(transform.position, waypoints[wayPointIndex].transform.position);
 
-        //Move
-        Move();
-
-        //Rotate
-        Rotate();
+        //Run through the states of the tank
+        State();
 
         //Check if the player is in the sight of our AI tank
         FOV();
 
+        //Do hearing emthod
         Hearing();
     }
 
+    //Check state
+    void State()
+    {
+        //switch through the differnet states 
+        switch (state)
+        {
+            //If state is Patrolling
+            case States.Patrolling:
+
+                //Patrol through waypoints
+                Patrol();
+
+                break;
+
+            case States.Chase:
+                //Chase the player
+                Chase();
+                break;
+
+            case States.Flee:
+                //Flee form the player
+                Flee();
+                break;
+
+            default:
+                break;
+        }
+
+    }
+
+
+    //Chase the player
+    void Chase()
+    {
+        //distnace float
+        float distance;
+
+        //The distance from our player's position to our postition
+        distance = Vector2.Distance(tank.transform.position, transform.position);
+
+        //Rotate the tank towards the player
+        Rotate(tank.transform.position);
+
+        //Move towards the player
+        transform.position = Vector3.MoveTowards(transform.position, tank.transform.position, Time.deltaTime * tankData.moveSpeed);
+    }
+
+
     // Move Method
-    void Move()
+    void Patrol()
     {
 
         // If distance is less than one
@@ -113,15 +186,18 @@ public class AIController : MonoBehaviour
 
             // Move the tank towards the waypoint
             transform.position = Vector3.MoveTowards(transform.position, offset, Time.deltaTime * tankData.moveSpeed);
+
+            //Rotate towards the waypoint
+            Rotate(waypoints[wayPointIndex].transform.position);
         }
     }
 
     //Rotate Method
-    void Rotate()
+    void Rotate(Vector3 position)
     {
 
         // set Direction to current position - waypoint position
-        directionWaypoint = transform.position - waypoints[wayPointIndex].transform.position;
+        directionWaypoint = transform.position - position;
 
         // Set rotation to direction
         Quaternion rotation = Quaternion.LookRotation(directionWaypoint);
@@ -147,7 +223,7 @@ public class AIController : MonoBehaviour
     }
 
 
-    //tHE FOLD OF VIEW THAT WE USE FOR THE ai'S SIGHT
+    //FOV to tell if the player is in sight
     void FOV()
     {
 
@@ -167,21 +243,59 @@ public class AIController : MonoBehaviour
 
         //angle
         angle = Vector3.Angle(direction, -transform.forward);
+
         if (angle < maxAngle * 0.5f)
         {
+            //Draw a line to the player's tank
             Debug.DrawLine(transform.position, tank.transform.position);
+
             print("Player in FOV");
+
+            //change state to chase
+            state = States.Chase;
         }
     }
 
+    //Is the player heard
     void Hearing()
     {
-
+        //hearing distance to check
         hearingDistance = Vector3.Distance(transform.position, tank.transform.position);
 
+        //if the hearing distance is less than our max hearing distance
         if (hearingDistance < maxHearingDistance)
         {
             print("Player is heard");
+
+            //Start chasing the player
+            state = States.Chase;
+        }
+
+    }
+
+    // Sendmessage to change the state
+    void StartFleeing()
+    {
+        //Change state to Flee
+        state = States.Flee;
+    }
+
+    //Flee method
+    void Flee()
+    {
+        //distnace 
+        float distance = Vector3.Distance(tank.transform.position, transform.position);
+
+        //if the distance is less than fleeingDistance
+        if (distance < fleeingDistance)
+        {
+            //Move away from the target
+            transform.position = Vector3.MoveTowards(transform.position, tank.transform.position, -Time.deltaTime * tankData.moveSpeed);
+        }
+        else
+        {
+            //state is equal to patrolling
+            state = States.Patrolling;
         }
     }
 }
