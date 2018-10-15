@@ -25,7 +25,12 @@ public class TankData : MonoBehaviour
         // Subtract the health
         health -= damage;
 
-        aiController.SendMessage("StartFleeing");
+        //If the aiController is not null
+        if (aiController != null)
+        {
+            //Flee
+            aiController.SendMessage("StartFleeing");
+        }
 
         // Check if health is lower than or 0
         if (health <= 0)

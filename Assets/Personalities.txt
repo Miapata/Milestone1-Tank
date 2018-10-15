@@ -1,0 +1,9 @@
+
+Chase= Once in sight, he will constantly pursue you
+
+      
+Flee=Once in sight, he will flee and once far enough he will fire once and start 		patrolling
+
+Ranger=Has better range and will fire from afar
+
+Normal= Behaves like a normal tank

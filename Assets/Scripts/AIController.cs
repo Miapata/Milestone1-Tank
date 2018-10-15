@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class AIController : MonoBehaviour
 {
     // The tank
@@ -9,6 +9,8 @@ public class AIController : MonoBehaviour
 
     // List of waypoints
     public GameObject[] waypoints;
+
+    public Material material;
 
     // tank data
     public TankData tankData;
@@ -28,6 +30,9 @@ public class AIController : MonoBehaviour
     //max hearing
     public float maxHearingDistance;
 
+    //Personality variable
+    public Personalities personality;
+
     public enum Personalities
     {
         //Once in sight, he will constantly pursue you
@@ -39,8 +44,8 @@ public class AIController : MonoBehaviour
         //Has better range and will fire from afar
         Ranger,
 
-        //Only fires when he is out of your view
-        Sneak
+        //Patrols and has vision/sight
+        Normal
     }
 
     //Enum for our states
@@ -61,6 +66,7 @@ public class AIController : MonoBehaviour
     //index for the waypoint list
     public int wayPointIndex = 1;
 
+    public NavMeshAgent agent;
 
     // This is the direction to the player's tanks
     private Vector3 direction;
@@ -88,6 +94,7 @@ public class AIController : MonoBehaviour
 
     private void Start()
     {
+
         //State is patrolling on start
         state = States.Patrolling;
     }
@@ -95,20 +102,77 @@ public class AIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         // sends message to Fire the missile
         SendMessage("FireMissile");
 
         // Distance between the target and current transform
         distance = Vector3.Distance(transform.position, waypoints[wayPointIndex].transform.position);
 
-        //Run through the states of the tank
-        State();
+        Personality();
+        InputCheck();
+    }
 
-        //Check if the player is in the sight of our AI tank
-        FOV();
+    void InputCheck()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            personality = Personalities.Normal;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            personality = Personalities.Chase;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            personality = Personalities.Flee;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            personality = Personalities.Ranger;
+        }
 
-        //Do hearing emthod
-        Hearing();
+    }
+
+    //Check the personality
+    void Personality()
+    {
+        //Normal
+        if (personality == Personalities.Normal)
+        {
+            //color is grey
+            material.color = Color.grey;
+            //Run through the states of the tank
+            State();
+
+            //Check if the player is in the sight of our AI tank
+            FOV();
+
+            //Do hearing emthod
+            Hearing();
+        }
+        //Chase
+        else if (personality == Personalities.Chase)
+        {
+            //green
+            material.color = Color.green;
+            Chase();
+        }
+        //Flee
+        else if (personality == Personalities.Flee)
+        {
+            //red
+            material.color = Color.red;
+            MoveAway();
+        }
+
+        // ranger
+        else if (personality == Personalities.Ranger)
+        {
+            //blue
+            material.color = Color.blue;
+            Rotate(tank.transform.position);
+        }
     }
 
     //Check state
@@ -151,14 +215,24 @@ public class AIController : MonoBehaviour
         //The distance from our player's position to our postition
         distanceFromPlayer = Vector3.Distance(tank.transform.position, transform.position);
 
-        if (distanceFromPlayer < 3)
+        if (distanceFromPlayer < 3 && personality == Personalities.Normal)
         {
             //Rotate the tank towards the player
             Rotate(tank.transform.position);
 
             //Move towards the player
-            transform.position = Vector3.MoveTowards(transform.position, tank.transform.position, Time.deltaTime * tankData.moveSpeed);
+            MoveToPlayer();
         }
+        else if (personality == Personalities.Chase)
+        {
+            //Rotate the tank towards the player
+            Rotate(tank.transform.position);
+
+            //Move towards the player
+            MoveToPlayer();
+        }
+
+        //Set the state to patrolling
         else
         {
             state = States.Patrolling;
@@ -193,7 +267,7 @@ public class AIController : MonoBehaviour
             offset.z = waypoints[wayPointIndex].transform.position.z;
 
             // Move the tank towards the waypoint
-            transform.position = Vector3.MoveTowards(transform.position, offset, Time.deltaTime * tankData.moveSpeed);
+            agent.SetDestination(waypoints[wayPointIndex].transform.position);
 
             //Rotate towards the waypoint
             Rotate(waypoints[wayPointIndex].transform.position);
@@ -301,12 +375,23 @@ public class AIController : MonoBehaviour
         if (distance < fleeingDistance)
         {
             //Move away from the target
-            transform.position = Vector3.MoveTowards(transform.position, tank.transform.position, -Time.deltaTime * tankData.moveSpeed);
+            MoveAway();
         }
         else
         {
             //state is equal to patrolling
             state = States.Patrolling;
         }
+    }
+
+    //Moves the tank to the player
+    void MoveToPlayer()
+    {
+        agent.SetDestination(tank.transform.position);
+    }
+    //Moves away from the player
+    void MoveAway()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, tank.transform.position, -Time.deltaTime * tankData.moveSpeed);
     }
 }

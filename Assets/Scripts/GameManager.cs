@@ -8,7 +8,10 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     // Get the tank data
-    public TankData tankData; 
+    public TankData tankData;
+
+    // all of the enemy tank data
+    public TankData[] enemyTankData;
 
     void Awake()
     {
@@ -16,7 +19,7 @@ public class GameManager : MonoBehaviour
         if (instance != null)
         {
             // Destroy gameObject
-            Destroy(gameObject); 
+            Destroy(gameObject);
         }
         else
         {
@@ -24,7 +27,7 @@ public class GameManager : MonoBehaviour
             instance = this;
 
             // Don't destroy on load
-            DontDestroyOnLoad(this);  
+            DontDestroyOnLoad(this);
         }
     }
 
