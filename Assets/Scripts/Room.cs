@@ -66,7 +66,7 @@ public class Room : MonoBehaviour
 
     void BakeSurfaces()
     {
-
+     
     }
 
     // Returns a random room
