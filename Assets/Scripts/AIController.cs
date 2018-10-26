@@ -8,7 +8,7 @@ public class AIController : MonoBehaviour
     public GameObject tank;
 
     // List of waypoints
-    public GameObject[] waypoints;
+    public List<GameObject> waypoints;
 
     public Material material;
 
@@ -107,7 +107,19 @@ public class AIController : MonoBehaviour
         SendMessage("FireMissile");
 
         // Distance between the target and current transform
-        distance = Vector3.Distance(transform.position, waypoints[wayPointIndex].transform.position);
+        try
+        {
+            if (waypoints[wayPointIndex] != null)
+            {
+                distance = Vector3.Distance(transform.position, waypoints[wayPointIndex].transform.position);
+            }
+        }
+        catch (System.Exception e)
+        {
+
+            print(e.Message);
+        }
+
 
         Personality();
         InputCheck();
@@ -246,11 +258,23 @@ public class AIController : MonoBehaviour
     {
 
         // If distance is less than one
-        if (distance < 1)
+        if (distance < 5)
         {
 
             // set waypointposition to the index's position
-            currentWaypointPosition = waypoints[wayPointIndex].transform.position;
+            try
+            {
+                if (waypoints[wayPointIndex])
+                {
+                    currentWaypointPosition = waypoints[wayPointIndex].transform.position;
+                }
+            }
+            catch (System.Exception e)
+            {
+
+                print(e.Message);
+            }
+
 
             //Increase the waypoint
             IncreaseWaypointIndex();
@@ -292,7 +316,7 @@ public class AIController : MonoBehaviour
     void IncreaseWaypointIndex()
     {
         //If the index is greater than the length
-        if (wayPointIndex >= waypoints.Length - 1)
+        if (wayPointIndex >= waypoints.ToArray().Length - 1)
         {
             // Reset the index
             wayPointIndex = 0;

@@ -12,12 +12,14 @@ public class GameManager : MonoBehaviour
 
     // all of the enemy tank data
     public TankData[] enemyTankData;
-
+    public bool overrideThis;
+    public bool mapOfTheDay;
     void Awake()
     {
         // Destroy using the singleton pattern
-        if (instance != null)
+        if (instance != null && overrideThis == true)
         {
+            TransferData(this);
             // Destroy gameObject
             Destroy(gameObject);
         }
@@ -29,7 +31,14 @@ public class GameManager : MonoBehaviour
             // Don't destroy on load
             DontDestroyOnLoad(this);
         }
+
+
     }
 
+    public void TransferData(GameManager gameManager)
+    {
+        instance.tankData = gameManager.tankData;
+        instance.enemyTankData = gameManager.enemyTankData;
+    }
 
 }

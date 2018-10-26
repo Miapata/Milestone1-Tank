@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+
 public class Room : MonoBehaviour
 {
     public int rows;
@@ -12,22 +13,39 @@ public class Room : MonoBehaviour
     private Room[,] grid;
     public GameObject[] gridPrefabs;
     public float[] rotations;
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-
+    public List<GameObject> spawnPoints;
+    public int wayPointsLength;
+    private NavMeshSurface surface;
+    private GameObject waypoint;
     // Use this for initialization
     void Start()
     {
+        //Set the seed
+        UnityEngine.Random.InitState(DateToInt(System.DateTime.Now));
+
         // Generate Grid
         GenerateGrid();
-        BakeSurfaces();
+
+        //Spawn the tanks
+        SpawnTanks();
+
+        RandomPatrolPoints();
     }
 
+    public void SpawnTanks()
+    {
+        Random.InitState(System.DateTime.Now.Second + System.DateTime.Now.Millisecond);
+        //Spawn the tanks and iterate through them
+        foreach (MonoBehaviour tank in GameManager.instance.enemyTankData)
+        {
+            tank.gameObject.transform.position = spawnPoints[Random.Range(0, spawnPoints.ToArray().Length)].transform.position;
+            tank.gameObject.SetActive(true);
+        }
+
+        GameManager.instance.tankData.gameObject.transform.position = spawnPoints[Random.Range(0, spawnPoints.ToArray().Length)].transform.position;
+
+
+    }
     public void GenerateGrid()
     {
         // Clear out the grid
@@ -57,21 +75,51 @@ public class Room : MonoBehaviour
                 // Get the room object
                 Room tempRoom = tempRoomObj.GetComponent<Room>();
 
-
+                //Add the spawnpoint to the list from the tile generated
+                spawnPoints.Add(tempRoomObj.transform.GetChild(1).gameObject);
+                surface = tempRoomObj.GetComponent<NavMeshSurface>();
+                surface.BuildNavMesh();
                 // Save it to the grid array
                 grid[j, i] = tempRoom;
+                SpawnTanks();
             }
         }
     }
 
-    void BakeSurfaces()
+    public void RandomPatrolPoints()
     {
-     
-    }
+        foreach (MonoBehaviour data in GameManager.instance.enemyTankData)
+        {
 
+            AIController controller = data.gameObject.GetComponent<AIController>();
+            for (int i = 0; i < wayPointsLength; i++)
+            {
+                controller.waypoints.Add(spawnPoints[Random.Range(0, spawnPoints.ToArray().Length)]);
+            }
+
+        }
+    }
     // Returns a random room
     public GameObject RandomRoomPrefab()
     {
         return gridPrefabs[Random.Range(0, gridPrefabs.Length)];
     }
+
+
+    //Get the date and converts it into an integer
+    public int DateToInt(System.DateTime dateTime)
+    {
+        if (GameManager.instance.mapOfTheDay)
+        {
+            return dateTime.Year + dateTime.Month + dateTime.Day;
+        }
+        else
+        {
+            return dateTime.Year + dateTime.Month + dateTime.Day + dateTime.Hour + dateTime.Minute + dateTime.Second + dateTime.Millisecond;
+        }
+
+
+    }
+
 }
+
