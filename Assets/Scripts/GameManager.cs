@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
 
     public void TransferData(GameManager gameManager)
     {
+        mapOfTheDay = GameManager.instance.mapOfTheDay;
         instance.tankData = gameManager.tankData;
         instance.enemyTankData = gameManager.enemyTankData;
     }

@@ -20,8 +20,7 @@ public class Room : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //Set the seed
-        UnityEngine.Random.InitState(DateToInt(System.DateTime.Now));
+     
 
         // Generate Grid
         GenerateGrid();
