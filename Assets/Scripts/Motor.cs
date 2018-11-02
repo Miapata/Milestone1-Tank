@@ -82,39 +82,50 @@ public class Motor : MonoBehaviour
         }
     }
 
-    public IEnumerator PowerupBehaviour(float time)
+    public void Powerups()
     {
         switch (powerup.currentPowerup)
         {
             case Powerup.ThePowerups.None:
                 break;
             case Powerup.ThePowerups.RapidFire:
-                RapidFirePowerup();
+                StartCoroutine("RapidFirePowerup");
                 break;
             case Powerup.ThePowerups.Health:
+                StartCoroutine("HealthPowerup");
+                HealthPowerup();
                 break;
             case Powerup.ThePowerups.Speed:
+                StartCoroutine("SpeedPowerup");
                 break;
             default:
                 break;
         }
 
+
+
     }
 
-    public void HealthPowerup()
+    public IEnumerator HealthPowerup()
     {
+        yield return new WaitForSeconds(0);
         tankData.health = 150;
 
     }
 
-    public void RapidFirePowerup()
+    public IEnumerator RapidFirePowerup()
     {
         tankData.rateOfFire = 0.3f;
+        yield return new WaitForSeconds(5);
+        tankData.rateOfFire = 1f;
     }
 
-    public void SpeedPowerup()
+    public IEnumerator SpeedPowerup()
     {
         tankData.moveSpeed += 2;
         tankData.rotateSpeed += 4;
+        yield return new WaitForSeconds(5);
+        tankData.moveSpeed -= 2;
+        tankData.rotateSpeed -= 4;
     }
 }
