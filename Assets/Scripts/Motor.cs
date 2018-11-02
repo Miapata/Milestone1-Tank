@@ -22,15 +22,17 @@ public class Motor : MonoBehaviour
     // tank data to get the variables
     public TankData tankData;
 
+    public Powerup powerup;
+
     //Jesus
     // used for the rate of fire
-    private float nextEventTime; 
+    private float nextEventTime;
 
-   // Use this for initialization
+    // Use this for initialization
     void Start()
     {
         // set the time event
-        nextEventTime = Time.time; 
+        nextEventTime = Time.time;
     }
 
     // Update is called once per frame
@@ -57,9 +59,10 @@ public class Motor : MonoBehaviour
             if (Input.GetKey(KeyCode.Space))
             {
                 // Fire the missile
-                FireMissile(); 
+                FireMissile();
 
             }
+
         }
 
 
@@ -75,7 +78,43 @@ public class Motor : MonoBehaviour
             // spawn the missile
             Instantiate(missile, origin.transform.position, Quaternion.LookRotation(transform.right));
             // set the the time we can fire again
-            nextEventTime = Time.time + tankData.rateOfFire; 
+            nextEventTime = Time.time + tankData.rateOfFire;
         }
+    }
+
+    public IEnumerator PowerupBehaviour(float time)
+    {
+        switch (powerup.currentPowerup)
+        {
+            case Powerup.ThePowerups.None:
+                break;
+            case Powerup.ThePowerups.RapidFire:
+                RapidFirePowerup();
+                break;
+            case Powerup.ThePowerups.Health:
+                break;
+            case Powerup.ThePowerups.Speed:
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    public void HealthPowerup()
+    {
+        tankData.health = 150;
+
+    }
+
+    public void RapidFirePowerup()
+    {
+        tankData.rateOfFire = 0.3f;
+    }
+
+    public void SpeedPowerup()
+    {
+        tankData.moveSpeed += 2;
+        tankData.rotateSpeed += 4;
     }
 }
