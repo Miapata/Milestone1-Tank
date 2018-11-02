@@ -66,6 +66,7 @@ public class AIController : MonoBehaviour
     //index for the waypoint list
     public int wayPointIndex = 1;
 
+    //Navmesh agent
     public NavMeshAgent agent;
 
     // This is the direction to the player's tanks
@@ -109,42 +110,48 @@ public class AIController : MonoBehaviour
         // Distance between the target and current transform
         try
         {
+            //If the waypoint is not null
             if (waypoints[wayPointIndex] != null)
             {
+                //set float to Vector3.Distance
                 distance = Vector3.Distance(transform.position, waypoints[wayPointIndex].transform.position);
             }
         }
+        //Catch any possible exception
         catch (System.Exception e)
         {
 
             print(e.Message);
         }
 
-
+        //Personlity method
         Personality();
-        InputCheck();
+        //Inputcheck
+        //InputCheck();
     }
 
-    void InputCheck()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            personality = Personalities.Normal;
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            personality = Personalities.Chase;
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            personality = Personalities.Flee;
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            personality = Personalities.Ranger;
-        }
+    //Input check for the keyboard
+    //void InputCheck()
+    //{
+       
+    //    if (Input.GetKeyDown(KeyCode.Alpha1))
+    //    {
+    //        personality = Personalities.Normal;
+    //    }
+    //    else if (Input.GetKeyDown(KeyCode.Alpha2))
+    //    {
+    //        personality = Personalities.Chase;
+    //    }
+    //    else if (Input.GetKeyDown(KeyCode.Alpha3))
+    //    {
+    //        personality = Personalities.Flee;
+    //    }
+    //    else if (Input.GetKeyDown(KeyCode.Alpha4))
+    //    {
+    //        personality = Personalities.Ranger;
+    //    }
 
-    }
+    //}
 
     //Check the personality
     void Personality()
@@ -168,6 +175,7 @@ public class AIController : MonoBehaviour
         {
             //green
             material.color = Color.green;
+            //Chase the player
             Chase();
         }
         //Flee
@@ -175,6 +183,7 @@ public class AIController : MonoBehaviour
         {
             //red
             material.color = Color.red;
+            //Move away from the player
             MoveAway();
         }
 
@@ -183,6 +192,7 @@ public class AIController : MonoBehaviour
         {
             //blue
             material.color = Color.blue;
+            //Rotate to the player
             Rotate(tank.transform.position);
         }
     }
@@ -261,11 +271,12 @@ public class AIController : MonoBehaviour
         if (distance < 5)
         {
 
-            // set waypointposition to the index's position
+            
             try
             {
                 if (waypoints[wayPointIndex])
                 {
+                    // set waypointposition to the index's position
                     currentWaypointPosition = waypoints[wayPointIndex].transform.position;
                 }
             }
@@ -392,7 +403,7 @@ public class AIController : MonoBehaviour
     //Flee method
     void Flee()
     {
-        //distnace 
+        //distance
         float distance = Vector3.Distance(tank.transform.position, transform.position);
 
         //if the distance is less than fleeingDistance
@@ -411,11 +422,13 @@ public class AIController : MonoBehaviour
     //Moves the tank to the player
     void MoveToPlayer()
     {
+        //set the destination to the tank
         agent.SetDestination(tank.transform.position);
     }
     //Moves away from the player
     void MoveAway()
     {
+        //move away from the player
         transform.position = Vector3.MoveTowards(transform.position, tank.transform.position, -Time.deltaTime * tankData.moveSpeed);
     }
 }

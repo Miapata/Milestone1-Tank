@@ -5,23 +5,34 @@ using UnityEngine.AI;
 
 public class Room : MonoBehaviour
 {
+    //These are the columns and rows
     public int rows;
     public int cols;
 
+    //room width
     private float roomWidth = 10.0f;
+    //room height
     private float roomHeight = 10.0f;
+    //Gird 
     private Room[,] grid;
+    //gridPrefabs
     public GameObject[] gridPrefabs;
+    //use for random rotations
     public float[] rotations;
+    //Spawnpoints 
     public List<GameObject> spawnPoints;
+    //The length of the spwanPOints
     public int wayPointsLength;
+
+    //Navmesh surface to rebake
     private NavMeshSurface surface;
+    //Our waypoint
     private GameObject waypoint;
-  
+
     // Use this for initialization
     void Start()
     {
- 
+        //Set a random seed using DateToint
         Random.InitState(DateToInt());
 
         // Generate Grid
@@ -30,23 +41,30 @@ public class Room : MonoBehaviour
         //Spawn the tanks
         SpawnTanks();
 
+
+        //Set random patrol points
         RandomPatrolPoints();
     }
 
+    //Spawn tanks
     public void SpawnTanks()
     {
-        
+
         //Spawn the tanks and iterate through them
         foreach (MonoBehaviour tank in GameManager.instance.enemyTankData)
         {
+            //Set the transform position to a random range
             tank.gameObject.transform.position = spawnPoints[Random.Range(0, spawnPoints.ToArray().Length)].transform.position;
+            //Set the gameObject's avctive state to false
             tank.gameObject.SetActive(true);
         }
 
+        //Set the player's position to random
         GameManager.instance.tankData.gameObject.transform.position = spawnPoints[Random.Range(0, spawnPoints.ToArray().Length)].transform.position;
 
 
     }
+    //Genereate grid
     public void GenerateGrid()
     {
         // Clear out the grid
@@ -65,7 +83,7 @@ public class Room : MonoBehaviour
 
                 // Create a new grid at the appropriate location
                 GameObject tempRoomObj = Instantiate(RandomRoomPrefab(), newPosition, new Quaternion(0, rotations[Random.Range(0, 4)], 0, 0)) as GameObject;
-                
+
 
                 // Set its parent
                 tempRoomObj.transform.parent = this.transform;
@@ -82,19 +100,26 @@ public class Room : MonoBehaviour
                 surface.BuildNavMesh();
                 // Save it to the grid array
                 grid[j, i] = tempRoom;
+                //Spawn the tanks
                 SpawnTanks();
             }
         }
     }
 
+    //RandomPatrolPoints
     public void RandomPatrolPoints()
     {
+        //Get the data from the enemy tanks
         foreach (MonoBehaviour data in GameManager.instance.enemyTankData)
         {
 
+            //get the controller
             AIController controller = data.gameObject.GetComponent<AIController>();
+
+            //If i is less than wayPointsLength, iterate through
             for (int i = 0; i < wayPointsLength; i++)
             {
+                //Add a waypoint
                 controller.waypoints.Add(spawnPoints[Random.Range(0, spawnPoints.ToArray().Length)]);
             }
 
@@ -111,13 +136,15 @@ public class Room : MonoBehaviour
     public int DateToInt()
     {
 
-
+        //If map of the day is true
         if (GameManager.instance.mapOfTheDay == true)
         {
+            //Return today
             return System.DateTime.Now.Year + System.DateTime.Now.Month + System.DateTime.Now.Day;
         }
         else
         {
+            //Return today, hours, minutes,seconds,milliseconds
             return System.DateTime.Now.Year + System.DateTime.Now.Month + System.DateTime.Now.Day + System.DateTime.Now.Hour + System.DateTime.Now.Minute + System.DateTime.Now.Second + System.DateTime.Now.Millisecond;
         }
 

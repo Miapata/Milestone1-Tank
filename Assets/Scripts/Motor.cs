@@ -38,6 +38,7 @@ public class Motor : MonoBehaviour
     void Update()
     {
 
+        //If we are not the AI
         if (!AI)
         {
             // Here we get the vertical float 
@@ -81,20 +82,28 @@ public class Motor : MonoBehaviour
         }
     }
 
+    //Powerups goes through all of powerups and calls a coroutine
     public void Powerups()
     {
+        //Seitch statement fo the powerups
         switch (powerup.currentPowerup)
         {
+            //If powerups is none
             case Powerup.ThePowerups.None:
                 break;
+                //If powerup rapid fire
             case Powerup.ThePowerups.RapidFire:
+                //Start the coroutine RapidFirePowerup
                 StartCoroutine("RapidFirePowerup");
                 break;
+                //If powerup is Health
             case Powerup.ThePowerups.Health:
+                //Start the coroutine Health powerup
                 StartCoroutine("HealthPowerup");
-                HealthPowerup();
                 break;
+                //If the powerup is Speed
             case Powerup.ThePowerups.Speed:
+                //Start the speed coorutine
                 StartCoroutine("SpeedPowerup");
                 break;
             default:
@@ -105,26 +114,39 @@ public class Motor : MonoBehaviour
 
     }
 
+    //IEnumerator for HealthPowerup
     public IEnumerator HealthPowerup()
     {
+        //Wait
         yield return new WaitForSeconds(0);
+        //Set health to 150
         tankData.health = 150;
 
     }
 
+    //IEnumerator for Rapid Fire
     public IEnumerator RapidFirePowerup()
     {
+        //Set the reateOfFire lower
         tankData.rateOfFire = 0.3f;
+        //wait
         yield return new WaitForSeconds(5);
+        //Set it back to normal
         tankData.rateOfFire = 1f;
     }
 
+    //IEnumerator SpeedPowerUp
     public IEnumerator SpeedPowerup()
     {
+        //Set the moveSpeed to 7
         tankData.moveSpeed = 7;
+        //Set the rotateSpeed to 6
         tankData.rotateSpeed = 6;
+        //Wait
         yield return new WaitForSeconds(5);
+        //Set the moveSpeed to 5
         tankData.moveSpeed = 5;
+        //Set the rotateSpeed to 3
         tankData.rotateSpeed = 3;
     }
 }

@@ -35,10 +35,14 @@ public class GameManager : MonoBehaviour
 
     }
 
+    //Transfer the data
     public void TransferData()
     {
+        //Mapoftheday to the instance
         mapOfTheDay = GameManager.instance.mapOfTheDay;
+        //Tankdata to the instance
         instance.tankData = this.tankData;
+        //enemyTankData to the instance
         instance.enemyTankData = this.enemyTankData;
     }
 
