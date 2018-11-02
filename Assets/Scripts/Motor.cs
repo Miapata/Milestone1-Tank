@@ -122,10 +122,10 @@ public class Motor : MonoBehaviour
 
     public IEnumerator SpeedPowerup()
     {
-        tankData.moveSpeed += 2;
-        tankData.rotateSpeed += 4;
+        tankData.moveSpeed = 7;
+        tankData.rotateSpeed = 6;
         yield return new WaitForSeconds(5);
-        tankData.moveSpeed -= 2;
-        tankData.rotateSpeed -= 4;
+        tankData.moveSpeed = 5;
+        tankData.rotateSpeed = 3;
     }
 }

@@ -53,6 +53,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e309f3d3b7537b3429c3915d348769c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 212516564870727588}
+  sphereCollider: {fileID: 135650346608377842}
+  rapidFireGameObject: {fileID: 0}
+  respawnTime: 20
   currentPowerup: 2
 --- !u!135 &135650346608377842
 SphereCollider:

@@ -17,10 +17,12 @@ public class Room : MonoBehaviour
     public int wayPointsLength;
     private NavMeshSurface surface;
     private GameObject waypoint;
+  
     // Use this for initialization
     void Start()
     {
-     
+ 
+        Random.InitState(DateToInt());
 
         // Generate Grid
         GenerateGrid();
@@ -33,7 +35,7 @@ public class Room : MonoBehaviour
 
     public void SpawnTanks()
     {
-        Random.InitState(System.DateTime.Now.Second + System.DateTime.Now.Millisecond);
+        
         //Spawn the tanks and iterate through them
         foreach (MonoBehaviour tank in GameManager.instance.enemyTankData)
         {
@@ -63,7 +65,7 @@ public class Room : MonoBehaviour
 
                 // Create a new grid at the appropriate location
                 GameObject tempRoomObj = Instantiate(RandomRoomPrefab(), newPosition, new Quaternion(0, rotations[Random.Range(0, 4)], 0, 0)) as GameObject;
-                print(tempRoomObj.transform.rotation.y);
+                
 
                 // Set its parent
                 tempRoomObj.transform.parent = this.transform;
@@ -106,15 +108,17 @@ public class Room : MonoBehaviour
 
 
     //Get the date and converts it into an integer
-    public int DateToInt(System.DateTime dateTime)
+    public int DateToInt()
     {
-        if (GameManager.instance.mapOfTheDay)
+
+
+        if (GameManager.instance.mapOfTheDay == true)
         {
-            return dateTime.Year + dateTime.Month + dateTime.Day;
+            return System.DateTime.Now.Year + System.DateTime.Now.Month + System.DateTime.Now.Day;
         }
         else
         {
-            return dateTime.Year + dateTime.Month + dateTime.Day + dateTime.Hour + dateTime.Minute + dateTime.Second + dateTime.Millisecond;
+            return System.DateTime.Now.Year + System.DateTime.Now.Month + System.DateTime.Now.Day + System.DateTime.Now.Hour + System.DateTime.Now.Minute + System.DateTime.Now.Second + System.DateTime.Now.Millisecond;
         }
 
 

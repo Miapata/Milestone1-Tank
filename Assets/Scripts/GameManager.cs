@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
         // Destroy using the singleton pattern
         if (instance != null && overrideThis == true)
         {
-            TransferData(this);
+            TransferData();
             // Destroy gameObject
             Destroy(gameObject);
         }
@@ -35,11 +35,11 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void TransferData(GameManager gameManager)
+    public void TransferData()
     {
         mapOfTheDay = GameManager.instance.mapOfTheDay;
-        instance.tankData = gameManager.tankData;
-        instance.enemyTankData = gameManager.enemyTankData;
+        instance.tankData = this.tankData;
+        instance.enemyTankData = this.enemyTankData;
     }
 
 }
