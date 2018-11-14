@@ -37,12 +37,14 @@ public class Missile : MonoBehaviour
 
             // Destroy the gameobject
             Destroy(gameObject);
-
-            // Check if the tag is Tank
-            if (other.gameObject.tag == "Tank") 
+            if (other != null)
             {
-                // Apply damage using the method
-                other.gameObject.GetComponent<TankData>().ApplyDamage(damage);
+                // Check if the tag is Tank
+                if (other.gameObject.tag == "Tank")
+                {
+                    // Apply damage using the method
+                    other.gameObject.GetComponent<TankData>().ApplyDamage(damage);
+                }
             }
 
         }

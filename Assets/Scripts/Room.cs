@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -13,7 +14,7 @@ public class Room : MonoBehaviour
     private float roomWidth = 10.0f;
     //room height
     private float roomHeight = 10.0f;
-    //Gird 
+    //Grid 
     private Room[,] grid;
     //gridPrefabs
     public GameObject[] gridPrefabs;
@@ -33,7 +34,7 @@ public class Room : MonoBehaviour
     void Start()
     {
         //Set a random seed using DateToint
-        Random.InitState(DateToInt());
+        UnityEngine.Random.InitState(Seed());
 
         // Generate Grid
         GenerateGrid();
@@ -54,13 +55,13 @@ public class Room : MonoBehaviour
         foreach (MonoBehaviour tank in GameManager.instance.enemyTankData)
         {
             //Set the transform position to a random range
-            tank.gameObject.transform.position = spawnPoints[Random.Range(0, spawnPoints.ToArray().Length)].transform.position;
+            tank.gameObject.transform.position = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.ToArray().Length)].transform.position;
             //Set the gameObject's avctive state to false
             tank.gameObject.SetActive(true);
         }
 
         //Set the player's position to random
-        GameManager.instance.tankData.gameObject.transform.position = spawnPoints[Random.Range(0, spawnPoints.ToArray().Length)].transform.position;
+        GameManager.instance.tankData.gameObject.transform.position = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.ToArray().Length)].transform.position;
 
 
     }
@@ -82,7 +83,7 @@ public class Room : MonoBehaviour
                 Vector3 newPosition = new Vector3(xPosition, 0.0f, zPosition);
 
                 // Create a new grid at the appropriate location
-                GameObject tempRoomObj = Instantiate(RandomRoomPrefab(), newPosition, new Quaternion(0, rotations[Random.Range(0, 4)], 0, 0)) as GameObject;
+                GameObject tempRoomObj = Instantiate(RandomRoomPrefab(), newPosition, new Quaternion(0, rotations[UnityEngine.Random.Range(0, 4)], 0, 0)) as GameObject;
 
 
                 // Set its parent
@@ -120,7 +121,7 @@ public class Room : MonoBehaviour
             for (int i = 0; i < wayPointsLength; i++)
             {
                 //Add a waypoint
-                controller.waypoints.Add(spawnPoints[Random.Range(0, spawnPoints.ToArray().Length)]);
+                controller.waypoints.Add(spawnPoints[UnityEngine.Random.Range(0, spawnPoints.ToArray().Length)]);
             }
 
         }
@@ -128,12 +129,12 @@ public class Room : MonoBehaviour
     // Returns a random room
     public GameObject RandomRoomPrefab()
     {
-        return gridPrefabs[Random.Range(0, gridPrefabs.Length)];
+        return gridPrefabs[UnityEngine.Random.Range(0, gridPrefabs.Length)];
     }
 
 
     //Get the date and converts it into an integer
-    public int DateToInt()
+    public int Seed()
     {
 
         //If map of the day is true
@@ -142,11 +143,26 @@ public class Room : MonoBehaviour
             //Return today
             return System.DateTime.Now.Year + System.DateTime.Now.Month + System.DateTime.Now.Day;
         }
-        else
+
+        //If our InputField was not empty
+        else if (!string.IsNullOrEmpty(GameManager.instance.seedText)||!(GameManager.instance.seedText.CompareTo("")==1))
         {
-            //Return today, hours, minutes,seconds,milliseconds
-            return System.DateTime.Now.Year + System.DateTime.Now.Month + System.DateTime.Now.Day + System.DateTime.Now.Hour + System.DateTime.Now.Minute + System.DateTime.Now.Second + System.DateTime.Now.Millisecond;
+            //Iterate through each char
+            foreach (char item in GameManager.instance.seedText)
+            {
+                //this gives us a numeric value to use
+                int a = item - 0;
+                //add a to our seed
+                GameManager.instance.seed += a;
+                //return our seed
+                return GameManager.instance.seed;
+
+            }
+            
         }
+        //Return today, hours, minutes,seconds,milliseconds
+        return System.DateTime.Now.Year + System.DateTime.Now.Month + System.DateTime.Now.Day + System.DateTime.Now.Hour + System.DateTime.Now.Minute + System.DateTime.Now.Second + System.DateTime.Now.Millisecond;
+
 
 
     }

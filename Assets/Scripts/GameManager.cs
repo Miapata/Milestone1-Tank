@@ -12,13 +12,28 @@ public class GameManager : MonoBehaviour
 
     // all of the enemy tank data
     public TankData[] enemyTankData;
+
+    //All of the powerups
+    public List<Powerup> powerups;
+
+    // input from seed field
+    public string seedText;
+
+    //result
+    public int seed;
+
+    //check if we want to overide this GameManager
     public bool overrideThis;
+
+    //Map of the day for map generation
     public bool mapOfTheDay;
+
     void Awake()
     {
         // Destroy using the singleton pattern
         if (instance != null && overrideThis == true)
         {
+            //Transfer data
             TransferData();
             // Destroy gameObject
             Destroy(gameObject);
@@ -40,10 +55,15 @@ public class GameManager : MonoBehaviour
     {
         //Mapoftheday to the instance
         mapOfTheDay = GameManager.instance.mapOfTheDay;
+        instance.mapOfTheDay = this.mapOfTheDay;
         //Tankdata to the instance
         instance.tankData = this.tankData;
         //enemyTankData to the instance
         instance.enemyTankData = this.enemyTankData;
+        //seedText ot the instance
+        instance.seedText = this.seedText;
+        //seed to the instance
+        instance.seed = this.seed;
     }
 
 }

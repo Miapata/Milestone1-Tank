@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class TankData : MonoBehaviour
 {
+
+    //Health text
+    public Text healthText;
+
     //Move speed
     public float moveSpeed;
 
@@ -19,7 +23,7 @@ public class TankData : MonoBehaviour
     //Ai controller
     public AIController aiController;
 
-    // This method applys damage if we are hit
+    // This method applies damage if we are hit
     public void ApplyDamage(float damage)
     {
         // Subtract the health
@@ -32,12 +36,14 @@ public class TankData : MonoBehaviour
             aiController.SendMessage("StartFleeing");
         }
 
-        // Check if health is lower than or 0
+        // Check if health is lower than or equal to 0
         if (health <= 0)
         {
             // Destroy gameObject
             Destroy(gameObject);
         }
+        //Updaet our health text to current health
+        healthText.text = "Health: "+ health.ToString();
 
     }
 }

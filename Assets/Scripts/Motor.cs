@@ -16,11 +16,15 @@ public class Motor : MonoBehaviour
     public CharacterController characterController;
 
     // Check if the gameobject is an AI
-
     public bool AI;
+
     // tank data to get the variables
     public TankData tankData;
 
+    //Power up time
+    public float powerupTime;
+
+    //the powerup
     public Powerup powerup;
 
     //Jesus
@@ -32,6 +36,9 @@ public class Motor : MonoBehaviour
     {
         // set the time event
         nextEventTime = Time.time;
+        //set the text to the current health
+        if (tankData != null)
+            tankData.healthText.text = "Health: " + tankData.health.ToString();
     }
 
     // Update is called once per frame
@@ -44,7 +51,7 @@ public class Motor : MonoBehaviour
             // Here we get the vertical float 
             float vertical = Input.GetAxis("Vertical");
 
-            // The character cntroller moves using the speed
+            // The character controller moves using the speed
             characterController.SimpleMove(transform.forward * vertical * -tankData.moveSpeed);
 
 
@@ -76,7 +83,8 @@ public class Motor : MonoBehaviour
         if (Time.time >= nextEventTime)
         {
             // spawn the missile
-            Instantiate(missile, origin.transform.position, Quaternion.LookRotation(transform.right));
+            Rigidbody instance = Instantiate(missile, origin.transform.position, Quaternion.LookRotation(transform.right));
+            instance.gameObject.layer = gameObject.layer;
             // set the the time we can fire again
             nextEventTime = Time.time + tankData.rateOfFire;
         }
@@ -91,19 +99,19 @@ public class Motor : MonoBehaviour
             //If powerups is none
             case Powerup.ThePowerups.None:
                 break;
-                //If powerup rapid fire
+            //If powerup rapid fire
             case Powerup.ThePowerups.RapidFire:
                 //Start the coroutine RapidFirePowerup
                 StartCoroutine("RapidFirePowerup");
                 break;
-                //If powerup is Health
+            //If powerup is Health
             case Powerup.ThePowerups.Health:
                 //Start the coroutine Health powerup
                 StartCoroutine("HealthPowerup");
                 break;
-                //If the powerup is Speed
+            //If the powerup is Speed
             case Powerup.ThePowerups.Speed:
-                //Start the speed coorutine
+                //Start the speed coroutine
                 StartCoroutine("SpeedPowerup");
                 break;
             default:
@@ -119,6 +127,12 @@ public class Motor : MonoBehaviour
     {
         //Wait
         yield return new WaitForSeconds(0);
+
+        if (tankData != null)
+        {
+            //Change the text of the health Text
+            tankData.healthText.text = "Health: " + tankData.health.ToString();
+        }
         //Set health to 150
         tankData.health = 150;
 
@@ -129,8 +143,8 @@ public class Motor : MonoBehaviour
     {
         //Set the reateOfFire lower
         tankData.rateOfFire = 0.3f;
-        //wait
-        yield return new WaitForSeconds(5);
+        //wait for powerupTime
+        yield return new WaitForSeconds(powerupTime);
         //Set it back to normal
         tankData.rateOfFire = 1f;
     }
@@ -142,8 +156,8 @@ public class Motor : MonoBehaviour
         tankData.moveSpeed = 7;
         //Set the rotateSpeed to 6
         tankData.rotateSpeed = 6;
-        //Wait
-        yield return new WaitForSeconds(5);
+        //Wait for powerupTime
+        yield return new WaitForSeconds(powerupTime);
         //Set the moveSpeed to 5
         tankData.moveSpeed = 5;
         //Set the rotateSpeed to 3

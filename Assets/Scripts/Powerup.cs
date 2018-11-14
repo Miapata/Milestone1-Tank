@@ -6,12 +6,19 @@ public class Powerup : MonoBehaviour
 {
     //Sprite renderer
     public SpriteRenderer spriteRenderer;
+
     //Sphere collider
     public SphereCollider sphereCollider;
+
     //rapidFire Gameobject
     public GameObject rapidFireGameObject;
+
     //respawnTime
     public float respawnTime = 20;
+
+    // the powerupTime 
+    public float powerupTime;
+
     //ThePowerups 
     public enum ThePowerups
     {
@@ -27,6 +34,13 @@ public class Powerup : MonoBehaviour
 
     //Current poweup
     public ThePowerups currentPowerup;
+
+
+    private void Start()
+    {
+        //Add this to Powerup list
+        GameManager.instance.powerups.Add(this);
+    }
 
     //OnTriggerEnter for our sphere collider
     public void OnTriggerEnter(Collider other)
@@ -58,10 +72,10 @@ public class Powerup : MonoBehaviour
     {
         //spriteRenderer to false
         spriteRenderer.enabled = false;
-        //Sphere colluder to false
+        //Sphere collider to false
         sphereCollider.enabled = false;
         //Wait for respawn time
-      yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(time);
         //Reset the two 
         spriteRenderer.enabled = true;
         sphereCollider.enabled = true;
@@ -71,12 +85,14 @@ public class Powerup : MonoBehaviour
     {
         //Gameobject to false
         rapidFireGameObject.SetActive(false);
-        //SPhere collider to false
+        //Sphere collider to false
         sphereCollider.enabled = false;
         //Wait for time
         yield return new WaitForSeconds(time);
         //Reset the two to true
         rapidFireGameObject.SetActive(true);
+
+        //Set the collider active
         sphereCollider.enabled = true;
     }
 }

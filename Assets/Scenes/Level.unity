@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 31493011}
   m_Layer: 10
   m_Name: TankIcon (1)
-  m_TagString: Untagged
+  m_TagString: Tank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 181427808}
   m_Layer: 11
   m_Name: Fire Position (1)
-  m_TagString: Untagged
+  m_TagString: Tank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 206303003}
   m_Layer: 11
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Tank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -417,7 +417,7 @@ GameObject:
   - component: {fileID: 350793868}
   m_Layer: 11
   m_Name: Fire Position (1)
-  m_TagString: Untagged
+  m_TagString: Tank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -467,6 +467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1a67f81b25d82f4b9c93634a53a8e46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthText: {fileID: 1387691119}
   moveSpeed: 4.84
   rotateSpeed: 3
   health: 100
@@ -489,6 +490,7 @@ MonoBehaviour:
   characterController: {fileID: 404391837}
   AI: 0
   tankData: {fileID: 404391835}
+  powerupTime: 5
   powerup: {fileID: 0}
 --- !u!143 &404391837
 CharacterController:
@@ -651,7 +653,7 @@ GameObject:
   - component: {fileID: 484870585}
   m_Layer: 10
   m_Name: TankIcon (1)
-  m_TagString: Untagged
+  m_TagString: Tank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -724,7 +726,7 @@ GameObject:
   - component: {fileID: 544001303}
   m_Layer: 11
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Tank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -808,7 +810,7 @@ GameObject:
   - component: {fileID: 609246870}
   m_Layer: 10
   m_Name: TankIcon (1)
-  m_TagString: Untagged
+  m_TagString: Tank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -899,7 +901,7 @@ Transform:
   m_GameObject: {fileID: 634742410}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -6.7, y: -0.5972189, z: 0.0403471}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalScale: {x: 0.44, y: 0.44, z: 0.44}
   m_Children:
   - {fileID: 544001302}
   - {fileID: 1210617813}
@@ -923,6 +925,7 @@ MonoBehaviour:
   characterController: {fileID: 634742416}
   AI: 0
   tankData: {fileID: 634742415}
+  powerupTime: 0
   powerup: {fileID: 0}
 --- !u!195 &634742413
 NavMeshAgent:
@@ -930,7 +933,7 @@ NavMeshAgent:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 634742410}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
@@ -966,6 +969,7 @@ MonoBehaviour:
   maxSightRadius: 0
   maxHearingDistance: 0
   personality: 3
+  speed: 0.32
   wayPointIndex: 0
   agent: {fileID: 634742413}
 --- !u!114 &634742415
@@ -979,7 +983,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1a67f81b25d82f4b9c93634a53a8e46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  healthText: {fileID: 0}
+  moveSpeed: 2.6
   rotateSpeed: 10
   health: 100
   rateOfFire: 1
@@ -1009,7 +1014,7 @@ BoxCollider:
   m_GameObject: {fileID: 634742410}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1098,7 +1103,7 @@ GameObject:
   - component: {fileID: 793589720}
   m_Layer: 11
   m_Name: Fire Position (1)
-  m_TagString: Untagged
+  m_TagString: Tank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1130,7 +1135,7 @@ GameObject:
   - component: {fileID: 886878689}
   m_Layer: 11
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Tank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1157,7 +1162,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 886878687}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5000001
   m_Height: 2
   m_Direction: 1
@@ -1265,7 +1270,7 @@ GameObject:
   - component: {fileID: 982226115}
   m_Layer: 11
   m_Name: Fire Position (1)
-  m_TagString: Untagged
+  m_TagString: Tank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1315,7 +1320,7 @@ Transform:
   m_GameObject: {fileID: 1109131153}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -9.966605, y: -0.5972189, z: 10.04}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalScale: {x: 0.44, y: 0.44, z: 0.44}
   m_Children:
   - {fileID: 206303002}
   - {fileID: 1414261683}
@@ -1339,6 +1344,7 @@ MonoBehaviour:
   characterController: {fileID: 1109131159}
   AI: 0
   tankData: {fileID: 1109131158}
+  powerupTime: 0
   powerup: {fileID: 0}
 --- !u!195 &1109131156
 NavMeshAgent:
@@ -1346,7 +1352,7 @@ NavMeshAgent:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1109131153}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
@@ -1382,6 +1388,7 @@ MonoBehaviour:
   maxSightRadius: 0
   maxHearingDistance: 0
   personality: 3
+  speed: 0.32
   wayPointIndex: 0
   agent: {fileID: 1109131156}
 --- !u!114 &1109131158
@@ -1395,7 +1402,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1a67f81b25d82f4b9c93634a53a8e46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  healthText: {fileID: 0}
+  moveSpeed: 2.6
   rotateSpeed: 10
   health: 100
   rateOfFire: 1
@@ -1425,7 +1433,7 @@ BoxCollider:
   m_GameObject: {fileID: 1109131153}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1502,6 +1510,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1192837668}
+  - {fileID: 1387691118}
   m_Father: {fileID: 961709030}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1816,7 +1825,7 @@ Transform:
   m_GameObject: {fileID: 1196818211}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2.86, y: -0.5972189, z: 0.0403471}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalScale: {x: 0.44, y: 0.44, z: 0.44}
   m_Children:
   - {fileID: 1633139044}
   - {fileID: 2083333633}
@@ -1840,6 +1849,7 @@ MonoBehaviour:
   characterController: {fileID: 1196818217}
   AI: 0
   tankData: {fileID: 1196818216}
+  powerupTime: 0
   powerup: {fileID: 0}
 --- !u!195 &1196818214
 NavMeshAgent:
@@ -1847,7 +1857,7 @@ NavMeshAgent:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1196818211}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
@@ -1883,6 +1893,7 @@ MonoBehaviour:
   maxSightRadius: 0
   maxHearingDistance: 0
   personality: 3
+  speed: 0.32
   wayPointIndex: 0
   agent: {fileID: 1196818214}
 --- !u!114 &1196818216
@@ -1896,7 +1907,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1a67f81b25d82f4b9c93634a53a8e46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  healthText: {fileID: 0}
+  moveSpeed: 2.6
   rotateSpeed: 10
   health: 100
   rateOfFire: 1
@@ -1926,7 +1938,7 @@ BoxCollider:
   m_GameObject: {fileID: 1196818211}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1985,7 +1997,7 @@ GameObject:
   - component: {fileID: 1210617814}
   m_Layer: 11
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Tank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2012,7 +2024,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1210617812}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5000001
   m_Height: 2
   m_Direction: 1
@@ -2157,7 +2169,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1343437707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2174,6 +2186,7 @@ MonoBehaviour:
   characterController: {fileID: 1343437711}
   AI: 1
   tankData: {fileID: 1343437710}
+  powerupTime: 0
   powerup: {fileID: 0}
 --- !u!195 &1343437708
 NavMeshAgent:
@@ -2181,7 +2194,7 @@ NavMeshAgent:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1343437706}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
@@ -2217,6 +2230,7 @@ MonoBehaviour:
   maxSightRadius: 15.61
   maxHearingDistance: 3
   personality: 3
+  speed: 0.32
   wayPointIndex: 0
   agent: {fileID: 1343437708}
 --- !u!114 &1343437710
@@ -2230,7 +2244,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1a67f81b25d82f4b9c93634a53a8e46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  healthText: {fileID: 0}
+  moveSpeed: 2.6
   rotateSpeed: 10
   health: 100
   rateOfFire: 1
@@ -2250,7 +2265,7 @@ CharacterController:
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_MinMoveDistance: 0.94
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &1343437712
 BoxCollider:
@@ -2260,7 +2275,7 @@ BoxCollider:
   m_GameObject: {fileID: 1343437706}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -2314,7 +2329,7 @@ Transform:
   m_GameObject: {fileID: 1343437706}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -9.966605, y: -0.5972189, z: 25.8}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.44, y: 0.44, z: 0.44}
   m_Children:
   - {fileID: 1440759499}
   - {fileID: 886878688}
@@ -2322,6 +2337,81 @@ Transform:
   m_Father: {fileID: 931675366}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1387691117
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1387691118}
+  - component: {fileID: 1387691120}
+  - component: {fileID: 1387691119}
+  m_Layer: 5
+  m_Name: Health Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1387691118
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1387691117}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1115934711}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -171, y: 137}
+  m_SizeDelta: {x: 296.8, y: 63.51}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1387691119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1387691117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 31
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 54
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Health:'
+--- !u!222 &1387691120
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1387691117}
+  m_CullTransparentMesh: 0
 --- !u!1 &1414261682
 GameObject:
   m_ObjectHideFlags: 0
@@ -2335,7 +2425,7 @@ GameObject:
   - component: {fileID: 1414261684}
   m_Layer: 11
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Tank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2362,7 +2452,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1414261682}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5000001
   m_Height: 2
   m_Direction: 1
@@ -2422,7 +2512,7 @@ GameObject:
   - component: {fileID: 1440759500}
   m_Layer: 11
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Tank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2584,7 +2674,7 @@ GameObject:
   - component: {fileID: 1633139045}
   m_Layer: 11
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Tank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2750,7 +2840,7 @@ GameObject:
   - component: {fileID: 2083333634}
   m_Layer: 11
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Tank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2917,7 +3007,7 @@ GameObject:
   - component: {fileID: 2112257808}
   m_Layer: 10
   m_Name: TankIcon (1)
-  m_TagString: Untagged
+  m_TagString: Tank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

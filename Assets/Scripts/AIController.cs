@@ -10,6 +10,7 @@ public class AIController : MonoBehaviour
     // List of waypoints
     public List<GameObject> waypoints;
 
+    //Our material
     public Material material;
 
     // tank data
@@ -33,6 +34,10 @@ public class AIController : MonoBehaviour
     //Personality variable
     public Personalities personality;
 
+    //speed
+    public float speed;
+
+    //List of personalities
     public enum Personalities
     {
         //Once in sight, he will constantly pursue you
@@ -61,6 +66,7 @@ public class AIController : MonoBehaviour
         Flee
     }
 
+    //Our current state
     public static States state;
 
     //index for the waypoint list
@@ -133,7 +139,7 @@ public class AIController : MonoBehaviour
     //Input check for the keyboard
     //void InputCheck()
     //{
-       
+
     //    if (Input.GetKeyDown(KeyCode.Alpha1))
     //    {
     //        personality = Personalities.Normal;
@@ -231,13 +237,13 @@ public class AIController : MonoBehaviour
     //Chase the player
     void Chase()
     {
-        //distnace float
+        //distance float
         float distanceFromPlayer;
 
         //The distance from our player's position to our postition
-        distanceFromPlayer = Vector3.Distance(tank.transform.position, transform.position);
+        distanceFromPlayer = Vector3.Distance(GameManager.instance.tankData.transform.position, transform.position);
 
-        if (distanceFromPlayer < 3 && personality == Personalities.Normal)
+        if (distanceFromPlayer < 8 && personality == Personalities.Normal)
         {
             //Rotate the tank towards the player
             Rotate(tank.transform.position);
@@ -271,7 +277,7 @@ public class AIController : MonoBehaviour
         if (distance < 5)
         {
 
-            
+
             try
             {
                 if (waypoints[wayPointIndex])
@@ -302,7 +308,7 @@ public class AIController : MonoBehaviour
             offset.z = waypoints[wayPointIndex].transform.position.z;
 
             // Move the tank towards the waypoint
-            agent.SetDestination(waypoints[wayPointIndex].transform.position);
+            transform.position = Vector3.MoveTowards(transform.position, waypoints[wayPointIndex].transform.position, speed);
 
             //Rotate towards the waypoint
             Rotate(waypoints[wayPointIndex].transform.position);
@@ -380,7 +386,7 @@ public class AIController : MonoBehaviour
     void Hearing()
     {
         //hearing distance to check
-        hearingDistance = Vector3.Distance(transform.position, tank.transform.position);
+        hearingDistance = Vector3.Distance(transform.position, GameManager.instance.transform.position);
 
         //if the hearing distance is less than our max hearing distance
         if (hearingDistance < maxHearingDistance)
@@ -423,12 +429,12 @@ public class AIController : MonoBehaviour
     void MoveToPlayer()
     {
         //set the destination to the tank
-        agent.SetDestination(tank.transform.position);
+        transform.position = Vector3.MoveTowards(transform.position, GameManager.instance.tankData.transform.position, Time.deltaTime * tankData.moveSpeed);
     }
     //Moves away from the player
     void MoveAway()
     {
         //move away from the player
-        transform.position = Vector3.MoveTowards(transform.position, tank.transform.position, -Time.deltaTime * tankData.moveSpeed);
+        transform.position = Vector3.MoveTowards(transform.position, GameManager.instance.tankData.transform.position, -Time.deltaTime * tankData.moveSpeed);
     }
 }
