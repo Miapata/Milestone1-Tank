@@ -145,8 +145,9 @@ public class Room : MonoBehaviour
         }
 
         //If our InputField was not empty
-        else if (!string.IsNullOrEmpty(GameManager.instance.seedText)||!(GameManager.instance.seedText.CompareTo("")==1))
+        else if (!string.IsNullOrEmpty(GameManager.instance.seedText))
         {
+            print("String was not null so we are using the text");
             //Iterate through each char
             foreach (char item in GameManager.instance.seedText)
             {
@@ -155,10 +156,11 @@ public class Room : MonoBehaviour
                 //add a to our seed
                 GameManager.instance.seed += a;
                 //return our seed
+                print("Seed:" + GameManager.instance.seed);
                 return GameManager.instance.seed;
 
             }
-            
+
         }
         //Return today, hours, minutes,seconds,milliseconds
         return System.DateTime.Now.Year + System.DateTime.Now.Month + System.DateTime.Now.Day + System.DateTime.Now.Hour + System.DateTime.Now.Minute + System.DateTime.Now.Second + System.DateTime.Now.Millisecond;

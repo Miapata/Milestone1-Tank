@@ -60,10 +60,7 @@ public class GameManager : MonoBehaviour
         instance.tankData = this.tankData;
         //enemyTankData to the instance
         instance.enemyTankData = this.enemyTankData;
-        //seedText ot the instance
-        instance.seedText = this.seedText;
-        //seed to the instance
-        instance.seed = this.seed;
+
     }
 
 }

@@ -37,8 +37,10 @@ public class Motor : MonoBehaviour
         // set the time event
         nextEventTime = Time.time;
         //set the text to the current health
-        if (tankData != null)
+        if (tankData.healthText != null)
+        {
             tankData.healthText.text = "Health: " + tankData.health.ToString();
+        }
     }
 
     // Update is called once per frame
@@ -93,7 +95,7 @@ public class Motor : MonoBehaviour
     //Powerups goes through all of powerups and calls a coroutine
     public void Powerups()
     {
-        //Seitch statement fo the powerups
+        //Switch statement for the powerups
         switch (powerup.currentPowerup)
         {
             //If powerups is none
@@ -133,6 +135,7 @@ public class Motor : MonoBehaviour
             //Change the text of the health Text
             tankData.healthText.text = "Health: " + tankData.health.ToString();
         }
+
         //Set health to 150
         tankData.health = 150;
 

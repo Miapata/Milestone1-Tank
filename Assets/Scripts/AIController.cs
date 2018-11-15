@@ -362,7 +362,14 @@ public class AIController : MonoBehaviour
         Debug.DrawRay(transform.position, rightAngle, Color.red);
 
         //direction 
-        direction = (tank.transform.position - transform.position);
+        if (tank != null)
+        {
+            direction = (tank.transform.position - transform.position);
+        }
+        else
+        {
+            return;
+        }
 
         //angle
         angle = Vector3.Angle(direction, -transform.forward);
