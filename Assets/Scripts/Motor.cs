@@ -27,7 +27,10 @@ public class Motor : MonoBehaviour
     //the powerup
     public Powerup powerup;
 
-    
+    //Player 2
+    public bool player2;
+
+
     // used for the rate of fire
     private float nextEventTime;
 
@@ -48,7 +51,7 @@ public class Motor : MonoBehaviour
     {
 
         //If we are not the AI
-        if (!AI)
+        if (!AI && GameManager.instance.multiplayer == false)
         {
             // Here we get the vertical float 
             float vertical = Input.GetAxis("Vertical");
@@ -72,6 +75,17 @@ public class Motor : MonoBehaviour
 
             }
 
+        }
+        else
+        {
+            if (!player2)
+            {
+
+            }
+            else
+            {
+
+            }
         }
 
 
