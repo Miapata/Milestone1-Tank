@@ -42,7 +42,7 @@ public class TankData : MonoBehaviour
             // Destroy gameObject
             Destroy(gameObject);
         }
-        //Updaet our health text to current health
+        //Update our health text to current health
         healthText.text = "Health: "+ health.ToString();
 
     }

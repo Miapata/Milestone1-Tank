@@ -32,7 +32,7 @@ public class Powerup : MonoBehaviour
         Speed
     }
 
-    //Current poweup
+    //Current powerup
     public ThePowerups currentPowerup;
 
 

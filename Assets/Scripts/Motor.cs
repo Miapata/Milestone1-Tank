@@ -27,7 +27,7 @@ public class Motor : MonoBehaviour
     //the powerup
     public Powerup powerup;
 
-    //Jesus
+    
     // used for the rate of fire
     private float nextEventTime;
 
@@ -144,7 +144,7 @@ public class Motor : MonoBehaviour
     //IEnumerator for Rapid Fire
     public IEnumerator RapidFirePowerup()
     {
-        //Set the reateOfFire lower
+        //Set the rateOfFire lower
         tankData.rateOfFire = 0.3f;
         //wait for powerupTime
         yield return new WaitForSeconds(powerupTime);

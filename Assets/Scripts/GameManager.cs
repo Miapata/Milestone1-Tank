@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     //Map of the day for map generation
     public bool mapOfTheDay;
 
+    //multiplayer bool
     public bool multiplayer;
 
     void Awake()
