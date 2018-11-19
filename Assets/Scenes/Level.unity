@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -448,13 +448,14 @@ GameObject:
   - component: {fileID: 404391837}
   - component: {fileID: 404391836}
   - component: {fileID: 404391835}
+  - component: {fileID: 404391838}
   m_Layer: 0
   m_Name: Player Tank
   m_TagString: Tank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &404391835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -492,6 +493,8 @@ MonoBehaviour:
   tankData: {fileID: 404391835}
   powerupTime: 5
   powerup: {fileID: 0}
+  player2: 0
+  inputManager: {fileID: 404391838}
 --- !u!143 &404391837
 CharacterController:
   m_ObjectHideFlags: 0
@@ -510,6 +513,21 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 3.4, z: 0}
+--- !u!114 &404391838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 404391834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47c80aec8e352b34fa9e766935019aba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  left: 0
+  right: 0
+  up: 0
+  down: 0
 --- !u!1 &427289047
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,7 +543,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &427289048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -563,6 +581,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &437020019
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 437020020}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &437020020
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 437020019}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.5533025, y: 0.7475975, z: 12.879826}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &445959435
 Prefab:
@@ -637,6 +683,10 @@ Prefab:
         type: 2}
       propertyPath: overrideThis
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302431269410202, guid: 6d2bd379429265e4788c4c97602d2cf4, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d2bd379429265e4788c4c97602d2cf4, type: 2}
@@ -927,6 +977,8 @@ MonoBehaviour:
   tankData: {fileID: 634742415}
   powerupTime: 0
   powerup: {fileID: 0}
+  player2: 0
+  inputManager: {fileID: 0}
 --- !u!195 &634742413
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1223,7 +1275,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &931675366
 Transform:
   m_ObjectHideFlags: 0
@@ -1346,6 +1398,8 @@ MonoBehaviour:
   tankData: {fileID: 1109131158}
   powerupTime: 0
   powerup: {fileID: 0}
+  player2: 0
+  inputManager: {fileID: 0}
 --- !u!195 &1109131156
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1594,7 +1648,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &1129200666
 Light:
   m_ObjectHideFlags: 0
@@ -1851,6 +1905,8 @@ MonoBehaviour:
   tankData: {fileID: 1196818216}
   powerupTime: 0
   powerup: {fileID: 0}
+  player2: 0
+  inputManager: {fileID: 0}
 --- !u!195 &1196818214
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2188,6 +2244,8 @@ MonoBehaviour:
   tankData: {fileID: 1343437710}
   powerupTime: 0
   powerup: {fileID: 0}
+  player2: 0
+  inputManager: {fileID: 0}
 --- !u!195 &1343437708
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2931,7 +2989,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2089260954
 Transform:
   m_ObjectHideFlags: 0

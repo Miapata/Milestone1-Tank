@@ -30,6 +30,7 @@ public class Motor : MonoBehaviour
     //Player 2
     public bool player2;
 
+    public InputManager inputManager;
 
     // used for the rate of fire
     private float nextEventTime;
@@ -43,6 +44,18 @@ public class Motor : MonoBehaviour
         if (tankData.healthText != null)
         {
             tankData.healthText.text = "Health: " + tankData.health.ToString();
+        }
+
+        //If we are not player 2
+        if (!player2)
+        {
+            //Set the keys to player 1: WASD
+            inputManager.Player1();
+        }
+        else
+        {
+            //Set the keys to player2: Arrows
+            inputManager.Player2();
         }
     }
 
@@ -76,20 +89,51 @@ public class Motor : MonoBehaviour
             }
 
         }
-        else
+        else if (GameManager.instance.multiplayer == true)
         {
-            if (!player2)
-            {
-
-            }
-            else
-            {
-
-            }
+            //Move
+            Move();
+            //Rotate
+            Rotate();
         }
 
 
 
+    }
+
+    //Rotate the player
+    void Rotate()
+    {
+        //If left is pressed
+        if (Input.GetKey(inputManager.left))
+        {
+            //Rotate
+            transform.Rotate(0, -1 * tankData.rotateSpeed, 0);
+        }
+        //If right is pressed
+        if (Input.GetKey(inputManager.right))
+        {
+            //rotate
+            transform.Rotate(0, 1 * tankData.rotateSpeed, 0);
+        }
+    }
+
+    //Move the player
+    void Move()
+    {
+        //If down is pressed
+        if (Input.GetKey(inputManager.down))
+        {
+            //move the player
+            transform.Translate(-transform.forward * tankData.moveSpeed);
+        }
+
+        //If up is pressed
+        if (Input.GetKey(inputManager.up))
+        {
+            //Move the player
+            transform.Translate(-transform.forward * tankData.moveSpeed);
+        }
     }
 
     //FireMissile method
@@ -144,14 +188,13 @@ public class Motor : MonoBehaviour
         //Wait
         yield return new WaitForSeconds(0);
 
+        //Set health to 150
+        tankData.health = 150;
         if (tankData != null)
         {
             //Change the text of the health Text
             tankData.healthText.text = "Health: " + tankData.health.ToString();
         }
-
-        //Set health to 150
-        tankData.health = 150;
 
     }
 

@@ -9,7 +9,7 @@ public class InputManager : MonoBehaviour
     public KeyCode up;
     public KeyCode down;
 
-    void Player1()
+    public void Player1()
     {
         left = KeyCode.A;
         right = KeyCode.D;
@@ -18,7 +18,7 @@ public class InputManager : MonoBehaviour
     }
 
    
-    void Player2()
+    public void Player2()
     {
         left = KeyCode.LeftArrow;
         right = KeyCode.RightArrow;

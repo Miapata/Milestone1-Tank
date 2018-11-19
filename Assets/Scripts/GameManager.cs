@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     //result
     public int seed;
 
-    //check if we want to overide this GameManager
+    //check if we want to override this GameManager
     public bool overrideThis;
 
     //Map of the day for map generation
