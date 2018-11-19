@@ -76,10 +76,11 @@ public class GameManager : MonoBehaviour
         instance.tankData = this.tankData;
         //enemyTankData to the instance
         instance.enemyTankData = this.enemyTankData;
-
+       
         instance.player1Camera = this.player1Camera;
         instance.player2Camera = this.player2Camera;
         instance.player2 = this.player2;
+       
 
     }
 

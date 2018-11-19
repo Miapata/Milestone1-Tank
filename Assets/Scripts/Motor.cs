@@ -98,6 +98,8 @@ public class Motor : MonoBehaviour
             Move();
             //Rotate
             Rotate();
+            //Fire a missile
+            Fire();
         }
 
 
@@ -136,6 +138,14 @@ public class Motor : MonoBehaviour
         {
             //Move the player
             transform.Translate(Vector3.back * tankData.moveSpeed * Time.deltaTime);
+        }
+    }
+
+    void Fire()
+    {
+        if (Input.GetKeyDown(inputManager.fire))
+        {
+            FireMissile();
         }
     }
 
