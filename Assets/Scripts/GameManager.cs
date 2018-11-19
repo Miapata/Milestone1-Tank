@@ -19,6 +19,12 @@ public class GameManager : MonoBehaviour
     // input from seed field
     public string seedText;
 
+    //music Volume
+    public float musicVolume;
+
+    //Sound FX Volume
+    public float soundFXVolume;
+
     //result
     public int seed;
 
@@ -27,6 +33,8 @@ public class GameManager : MonoBehaviour
 
     //Map of the day for map generation
     public bool mapOfTheDay;
+
+    public bool multiplayer;
 
     void Awake()
     {
