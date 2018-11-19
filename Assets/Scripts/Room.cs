@@ -61,8 +61,13 @@ public class Room : MonoBehaviour
         }
 
         //Set the player's position to random
-        GameManager.instance.tankData.gameObject.transform.position = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.ToArray().Length)].transform.position;
-
+        foreach (TankData item in GameManager.instance.tankData)
+        {
+            if (item.gameObject.activeInHierarchy)
+            {
+                item.gameObject.transform.position = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.ToArray().Length)].transform.position;
+            }
+        }
 
     }
     //Genereate grid
@@ -84,7 +89,6 @@ public class Room : MonoBehaviour
 
                 // Create a new grid at the appropriate location
                 GameObject tempRoomObj = Instantiate(RandomRoomPrefab(), newPosition, new Quaternion(0, rotations[UnityEngine.Random.Range(0, 4)], 0, 0)) as GameObject;
-
 
                 // Set its parent
                 tempRoomObj.transform.parent = this.transform;

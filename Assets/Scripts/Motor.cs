@@ -46,16 +46,19 @@ public class Motor : MonoBehaviour
             tankData.healthText.text = "Health: " + tankData.health.ToString();
         }
 
-        //If we are not player 2
-        if (!player2)
+        if (gameObject.layer != 11)
         {
-            //Set the keys to player 1: WASD
-            inputManager.Player1();
-        }
-        else
-        {
-            //Set the keys to player2: Arrows
-            inputManager.Player2();
+            //If we are not player 2
+            if (!player2)
+            {
+                //Set the keys to player 1: WASD
+                inputManager.Player1();
+            }
+            else
+            {
+                //Set the keys to player2: Arrows
+                inputManager.Player2();
+            }
         }
     }
 
@@ -125,14 +128,14 @@ public class Motor : MonoBehaviour
         if (Input.GetKey(inputManager.down))
         {
             //move the player
-            transform.Translate(-transform.forward * tankData.moveSpeed);
+            transform.Translate(Vector3.forward * tankData.moveSpeed * Time.deltaTime);
         }
 
         //If up is pressed
         if (Input.GetKey(inputManager.up))
         {
             //Move the player
-            transform.Translate(-transform.forward * tankData.moveSpeed);
+            transform.Translate(Vector3.back * tankData.moveSpeed * Time.deltaTime);
         }
     }
 

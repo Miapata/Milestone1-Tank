@@ -7,8 +7,10 @@ public class GameManager : MonoBehaviour
     // instance
     public static GameManager instance;
 
+    public GameObject player2;
+
     // Get the tank data
-    public TankData tankData;
+    public List<TankData> tankData;
 
     // all of the enemy tank data
     public TankData[] enemyTankData;
@@ -36,6 +38,11 @@ public class GameManager : MonoBehaviour
 
     //multiplayer bool
     public bool multiplayer;
+
+    //Player 2 camera
+    public Camera player2Camera;
+    //Player 1 camera
+    public Camera player1Camera;
 
     void Awake()
     {
@@ -69,6 +76,10 @@ public class GameManager : MonoBehaviour
         instance.tankData = this.tankData;
         //enemyTankData to the instance
         instance.enemyTankData = this.enemyTankData;
+
+        instance.player1Camera = this.player1Camera;
+        instance.player2Camera = this.player2Camera;
+        instance.player2 = this.player2;
 
     }
 

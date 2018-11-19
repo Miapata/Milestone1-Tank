@@ -23,7 +23,7 @@ public class InputManager : MonoBehaviour
         left = KeyCode.LeftArrow;
         right = KeyCode.RightArrow;
         up = KeyCode.UpArrow;
-        down = KeyCode.LeftArrow;
+        down = KeyCode.DownArrow;
     }
 
 

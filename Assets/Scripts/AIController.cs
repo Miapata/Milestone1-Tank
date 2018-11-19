@@ -98,7 +98,7 @@ public class AIController : MonoBehaviour
 
     //hearing distance
     private float hearingDistance;
-
+    RaycastHit raycastHit;
     private void Start()
     {
 
@@ -241,7 +241,7 @@ public class AIController : MonoBehaviour
         float distanceFromPlayer;
 
         //The distance from our player's position to our postition
-        distanceFromPlayer = Vector3.Distance(GameManager.instance.tankData.transform.position, transform.position);
+        distanceFromPlayer = Vector3.Distance(tank.transform.position, transform.position);
 
         if (distanceFromPlayer < 8 && personality == Personalities.Normal)
         {
@@ -349,51 +349,69 @@ public class AIController : MonoBehaviour
     //FOV to tell if the player is in sight
     void FOV()
     {
-
-        //Left angle to draw
-        leftAngle = Quaternion.AngleAxis(maxAngle / 2, transform.up) * -transform.forward * maxSightRadius;
-
-        //right angle
-        rightAngle = Quaternion.AngleAxis(-maxAngle / 2, transform.up) * -transform.forward * maxSightRadius;
-
-        //Draw a ray for the left angle
-        Debug.DrawRay(transform.position, leftAngle, Color.red);
-        //Draw a ray for the right angle
-        Debug.DrawRay(transform.position, rightAngle, Color.red);
-
-        //direction 
-        if (tank != null)
+        if (Physics.Raycast(transform.position, transform.forward, out raycastHit, maxSightRadius))
         {
-            direction = (tank.transform.position - transform.position);
-        }
-        else
-        {
-            return;
+            if (raycastHit.collider != null)
+            {
+                if (raycastHit.collider.tag != "Tank")
+                {
+                    return;
+                }
+                else
+                {
+                    if (raycastHit.collider.gameObject.layer == 0)
+                    {
+                        tank = raycastHit.collider.gameObject;
+                        state = States.Chase;
+                    }
+                }
+            }
         }
 
-        //angle
-        angle = Vector3.Angle(direction, -transform.forward);
+        ////Left angle to draw
+        //leftAngle = Quaternion.AngleAxis(maxAngle / 2, transform.up) * -transform.forward * maxSightRadius;
 
-        if (angle < maxAngle * 0.5f)
-        {
-            //Draw a line to the player's tank
-            Debug.DrawLine(transform.position, tank.transform.position);
+        ////right angle
+        //rightAngle = Quaternion.AngleAxis(-maxAngle / 2, transform.up) * -transform.forward * maxSightRadius;
 
-            print("Player in FOV");
+        ////Draw a ray for the left angle
+        //Debug.DrawRay(transform.position, leftAngle, Color.red);
+        ////Draw a ray for the right angle
+        //Debug.DrawRay(transform.position, rightAngle, Color.red);
 
-            //Rotate the tank towards the player
-            Rotate(tank.transform.position);
+        ////direction 
+        //if (tank != null)
+        //{
+        //    direction = (tank.transform.position - transform.position);
+        //}
+        //else
+        //{
+        //    return;
+        //}
 
-            //change state to chase
-            state = States.Chase;
-        }
+        ////angle
+        //angle = Vector3.Angle(direction, -transform.forward);
+
+        //if (angle < maxAngle * 0.5f)
+        //{
+        //    //Draw a line to the player's tank
+        //    Debug.DrawLine(transform.position, tank.transform.position);
+
+        //    print("Player in FOV");
+
+        //    //Rotate the tank towards the player
+        //    Rotate(tank.transform.position);
+
+        //    //change state to chase
+        //    state = States.Chase;
+        //}
     }
 
     //Is the player heard
     void Hearing()
     {
         //hearing distance to check
-        hearingDistance = Vector3.Distance(transform.position, GameManager.instance.transform.position);
+        hearingDistance = Vector3.Distance(transform.position, GameManager.instance.tankData[1].transform.position);
 
         //if the hearing distance is less than our max hearing distance
         if (hearingDistance < maxHearingDistance)
@@ -436,12 +454,12 @@ public class AIController : MonoBehaviour
     void MoveToPlayer()
     {
         //set the destination to the tank
-        transform.position = Vector3.MoveTowards(transform.position, GameManager.instance.tankData.transform.position, Time.deltaTime * tankData.moveSpeed);
+        transform.position = Vector3.MoveTowards(transform.position, tank.transform.position, Time.deltaTime * tankData.moveSpeed);
     }
     //Moves away from the player
     void MoveAway()
     {
         //move away from the player
-        transform.position = Vector3.MoveTowards(transform.position, GameManager.instance.tankData.transform.position, -Time.deltaTime * tankData.moveSpeed);
+        transform.position = Vector3.MoveTowards(transform.position, tank.transform.position, -Time.deltaTime * tankData.moveSpeed);
     }
 }
