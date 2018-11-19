@@ -17,7 +17,7 @@ public class InputManager : MonoBehaviour
         down = KeyCode.S;
     }
 
-   e
+   
     void Player2()
     {
         left = KeyCode.LeftArrow;
