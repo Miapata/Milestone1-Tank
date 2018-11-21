@@ -538,6 +538,7 @@ MonoBehaviour:
   right: 0
   up: 0
   down: 0
+  fire: 0
 --- !u!1 &427289047
 GameObject:
   m_ObjectHideFlags: 0
@@ -3317,6 +3318,11 @@ Prefab:
         type: 2}
       propertyPath: moveSpeed
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 224770407402396626, guid: 3fae74279019c564eb40175fa7add71a,
+        type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3fae74279019c564eb40175fa7add71a, type: 2}

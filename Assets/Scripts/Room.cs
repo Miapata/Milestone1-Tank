@@ -65,6 +65,7 @@ public class Room : MonoBehaviour
         {
             if (item.gameObject.activeInHierarchy)
             {
+               
                 item.gameObject.transform.position = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.ToArray().Length)].transform.position;
             }
         }

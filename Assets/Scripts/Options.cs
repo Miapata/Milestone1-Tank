@@ -22,6 +22,7 @@ public class Options : MonoBehaviour
     {
 
         GameManager.instance.soundFXVolume = soundFxSlider.value;
+      
     }
 
     //Updates the music volume

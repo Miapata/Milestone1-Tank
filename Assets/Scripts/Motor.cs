@@ -130,17 +130,18 @@ public class Motor : MonoBehaviour
         if (Input.GetKey(inputManager.down))
         {
             //move the player
-            transform.Translate(Vector3.forward * tankData.moveSpeed * Time.deltaTime);
+            characterController.SimpleMove(transform.forward * tankData.moveSpeed);
         }
 
         //If up is pressed
         if (Input.GetKey(inputManager.up))
         {
             //Move the player
-            transform.Translate(Vector3.back * tankData.moveSpeed * Time.deltaTime);
+            characterController.SimpleMove(transform.forward * -tankData.moveSpeed);
         }
     }
 
+    //Fire the missile
     void Fire()
     {
         if (Input.GetKeyDown(inputManager.fire))

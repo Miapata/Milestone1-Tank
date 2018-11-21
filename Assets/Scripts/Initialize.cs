@@ -8,6 +8,7 @@ public class Initialize : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        //If we are in multiplayer mode, then Start the Multiplayer initailization
         if (GameManager.instance.multiplayer == true)
         {
 
@@ -15,19 +16,16 @@ public class Initialize : MonoBehaviour
             MultiplayerMode();
         }
     }
+    //Jesus Christ
 
     void MultiplayerMode()
     {
+        //Set the player 2 status to active
         GameManager.instance.player2.SetActive(true);
+        //Reset player 1 camera's settings
         GameManager.instance.player1Camera.Reset();
-        GameManager.instance.player1Camera.rect = new Rect(0, 0.5f, 0, 0);
-        foreach (GameObject item in gameObjects)
-        {
-            if (item.activeInHierarchy == false)
-            {
-                item.SetActive(true);
-            }
-        }
+        //Set the cameras settings to a new rect
+        GameManager.instance.player1Camera.rect = new Rect(0, 0.5f, 1, 1);
     }
 
 

@@ -44,6 +44,11 @@ public class GameManager : MonoBehaviour
     //Player 1 camera
     public Camera player1Camera;
 
+    public GameObject explosionSoundFX;
+    public GameObject atmosphereMusic;
+    public GameObject tankFireSoundFX;
+    public GameObject clickSoundFX;
+
     void Awake()
     {
         // Destroy using the singleton pattern
