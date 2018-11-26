@@ -17,6 +17,7 @@ public class Sounds : MonoBehaviour
             Destroy(this);
         }
     }
+    
     public void ClickSoundFX()
     {
         GameObject instance = Instantiate(GameManager.instance.clickSoundFX, transform.position, Quaternion.identity);

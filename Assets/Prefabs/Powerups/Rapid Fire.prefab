@@ -175,6 +175,7 @@ MonoBehaviour:
   sphereCollider: {fileID: 135493190934795436}
   rapidFireGameObject: {fileID: 1829577952894636}
   respawnTime: 20
+  powerupTime: 0
   currentPowerup: 1
 --- !u!135 &135493190934795436
 SphereCollider:

@@ -156,6 +156,7 @@ public class Motor : MonoBehaviour
         // check if we can fire
         if (Time.time >= nextEventTime)
         {
+           
             // spawn the missile
             Rigidbody instance = Instantiate(missile, origin.transform.position, Quaternion.LookRotation(transform.right));
             instance.gameObject.layer = gameObject.layer;

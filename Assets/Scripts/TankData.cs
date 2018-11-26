@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 public class TankData : MonoBehaviour
 {
+    //Our lose screen
+    public GameObject loseScreen;
+    //Our win screen
+    public GameObject winScreen;
 
     //Health text
     public Text healthText;
@@ -39,8 +43,11 @@ public class TankData : MonoBehaviour
         // Check if health is lower than or equal to 0
         if (health <= 0)
         {
+            //Activate the lose screen
+            loseScreen.SetActive(true);
             // Destroy gameObject
             Destroy(gameObject);
+
         }
         //Update our health text to current health
         healthText.text = "Health: " + health.ToString();
