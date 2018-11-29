@@ -156,9 +156,11 @@ public class Motor : MonoBehaviour
         // check if we can fire
         if (Time.time >= nextEventTime)
         {
-           
+
             // spawn the missile
             Rigidbody instance = Instantiate(missile, origin.transform.position, Quaternion.LookRotation(transform.right));
+            GameObject missileLaunchSound = Instantiate(GameManager.instance.missileLaunchSoundFX, transform.position, Quaternion.identity);
+            Destroy(missileLaunchSound, 2);
             instance.gameObject.layer = gameObject.layer;
             // set the the time we can fire again
             nextEventTime = Time.time + tankData.rateOfFire;

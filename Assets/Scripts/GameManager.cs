@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject explosionSoundFX;
     public GameObject atmosphereMusic;
-    public GameObject tankFireSoundFX;
+    public GameObject missileLaunchSoundFX;
     public GameObject clickSoundFX;
 
     void Awake()

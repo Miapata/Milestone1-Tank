@@ -34,7 +34,8 @@ public class Missile : MonoBehaviour
 
             // Instantiate the explosion
             Instantiate(explosion, transform.position, Quaternion.identity);
-
+            GameObject explosionSound = Instantiate(GameManager.instance.explosionSoundFX, transform.position, Quaternion.identity);
+            Destroy(explosionSound, 1);
             // Destroy the gameobject
             Destroy(gameObject);
             if (other != null)
