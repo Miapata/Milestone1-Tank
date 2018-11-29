@@ -376,6 +376,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1a67f81b25d82f4b9c93634a53a8e46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loseScreen: {fileID: 0}
+  winScreen: {fileID: 0}
+  healthText: {fileID: 0}
   moveSpeed: 10
   rotateSpeed: 3
   health: 100
@@ -402,6 +405,7 @@ MonoBehaviour:
   maxSightRadius: 0
   maxHearingDistance: 0
   personality: 0
+  speed: 0
   wayPointIndex: 1
   agent: {fileID: 195115241889364666}
 --- !u!114 &114678160667793792
@@ -420,6 +424,10 @@ MonoBehaviour:
   characterController: {fileID: 143072489457022928}
   AI: 1
   tankData: {fileID: 114234585343131562}
+  powerupTime: 0
+  powerup: {fileID: 0}
+  player2: 0
+  inputManager: {fileID: 0}
 --- !u!143 &143072489457022928
 CharacterController:
   m_ObjectHideFlags: 1
