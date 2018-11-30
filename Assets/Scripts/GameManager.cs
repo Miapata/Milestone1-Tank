@@ -39,10 +39,16 @@ public class GameManager : MonoBehaviour
     //multiplayer bool
     public bool multiplayer;
 
+
     //Player 2 camera
     public Camera player2Camera;
     //Player 1 camera
     public Camera player1Camera;
+
+    // Player 1 Aim RectTransform
+    public RectTransform aimRectTransform;
+    public RectTransform scoreRectTransform;
+    public RectTransform healthRectTransform;
 
     public GameObject explosionSoundFX;
     public GameObject atmosphereMusic;
@@ -81,11 +87,13 @@ public class GameManager : MonoBehaviour
         instance.tankData = this.tankData;
         //enemyTankData to the instance
         instance.enemyTankData = this.enemyTankData;
-       
+
+   
+
         instance.player1Camera = this.player1Camera;
         instance.player2Camera = this.player2Camera;
         instance.player2 = this.player2;
-       
+
 
     }
 

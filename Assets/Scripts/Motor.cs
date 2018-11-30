@@ -45,7 +45,10 @@ public class Motor : MonoBehaviour
         {
             tankData.healthText.text = "Health: " + tankData.health.ToString();
         }
-
+        if (AI)
+        {
+            return;
+        }
         if (gameObject.layer != 11)
         {
             //If we are not player 2
@@ -66,8 +69,12 @@ public class Motor : MonoBehaviour
     void Update()
     {
 
-        //If we are not the AI
-        if (!AI && GameManager.instance.multiplayer == false)
+        // If gameobject is an AI
+        if (AI)
+        {
+            return;
+        }
+        if (GameManager.instance.multiplayer == false)
         {
             // Here we get the vertical float 
             float vertical = Input.GetAxis("Vertical");
@@ -159,6 +166,7 @@ public class Motor : MonoBehaviour
 
             // spawn the missile
             Rigidbody instance = Instantiate(missile, origin.transform.position, Quaternion.LookRotation(transform.right));
+            instance.GetComponent<Missile>().parent = transform.root.gameObject;
             GameObject missileLaunchSound = Instantiate(GameManager.instance.missileLaunchSoundFX, transform.position, Quaternion.identity);
             Destroy(missileLaunchSound, 2);
             instance.gameObject.layer = gameObject.layer;
@@ -202,12 +210,13 @@ public class Motor : MonoBehaviour
     //IEnumerator for HealthPowerup
     public IEnumerator HealthPowerup()
     {
+
         //Wait
         yield return new WaitForSeconds(0);
 
         //Set health to 150
         tankData.health = 150;
-        if (tankData != null)
+        if (tankData.healthText != null)
         {
             //Change the text of the health Text
             tankData.healthText.text = "Health: " + tankData.health.ToString();

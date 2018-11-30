@@ -7,6 +7,7 @@ public class Missile : MonoBehaviour
     //Rigidbody
     public Rigidbody rigidBody;
 
+    public GameObject parent;
     //Explosion Gamobject
     public GameObject explosion;
 
@@ -41,10 +42,15 @@ public class Missile : MonoBehaviour
             if (other != null)
             {
                 // Check if the tag is Tank
-                if (other.gameObject.tag == "Tank")
+                if (other.gameObject.transform.root.tag == "Tank")
                 {
+                    if (parent != null)
+                    {
+                        parent.GetComponent<TankData>().AddScore();
+                    }
+                    print("Applying damage to: " + other.gameObject.name);
                     // Apply damage using the method
-                    other.gameObject.GetComponent<TankData>().ApplyDamage(damage);
+                    other.gameObject.transform.root.GetComponent<TankData>().ApplyDamage(damage);
                 }
             }
 
