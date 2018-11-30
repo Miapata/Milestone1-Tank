@@ -49,6 +49,8 @@ public class Powerup : MonoBehaviour
         //If the tag is Tank
         if (other.gameObject.tag == "Tank")
         {
+            GameObject powerUpSound = Instantiate(GameManager.instance.powerupSoundFX, transform.position, Quaternion.identity);
+            Destroy(powerUpSound, 1f);
             //Set the motor's power up to this 
             other.GetComponent<Motor>().powerup = this;
             //Run the power up method

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
+    //Our input manager is used to set the different keys in multiplayer mode
+
+    //Here are the keys we need
     public KeyCode left;
     public KeyCode right;
     public KeyCode up;
@@ -12,6 +15,7 @@ public class InputManager : MonoBehaviour
     public KeyCode fire;
     public void Player1()
     {
+        //Set the keys to WASD and space for fire
         left = KeyCode.A;
         right = KeyCode.D;
         up = KeyCode.W;
@@ -22,6 +26,7 @@ public class InputManager : MonoBehaviour
 
     public void Player2()
     {
+        //Set to the arrow keys and tight control for fire
         left = KeyCode.LeftArrow;
         right = KeyCode.RightArrow;
         up = KeyCode.UpArrow;

@@ -18,6 +18,7 @@ public class Sounds : MonoBehaviour
         }
     }
     
+    //This is our clicking sound effect whenever we press a button
     public void ClickSoundFX()
     {
         GameObject instance = Instantiate(GameManager.instance.clickSoundFX, transform.position, Quaternion.identity);

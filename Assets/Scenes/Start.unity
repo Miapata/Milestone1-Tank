@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -214,6 +214,18 @@ Prefab:
       propertyPath: atmosphereMusic
       value: 
       objectReference: {fileID: 1347518529909810, guid: e978bacfe309e8449bf56a2f3cbc03c4,
+        type: 2}
+    - target: {fileID: 114196031736276408, guid: 6d2bd379429265e4788c4c97602d2cf4,
+        type: 2}
+      propertyPath: powerupSoundFX
+      value: 
+      objectReference: {fileID: 1350775675368132, guid: 6fda3247ff97be8449dc17abd1fc7f01,
+        type: 2}
+    - target: {fileID: 114196031736276408, guid: 6d2bd379429265e4788c4c97602d2cf4,
+        type: 2}
+      propertyPath: tankDiedSoundFX
+      value: 
+      objectReference: {fileID: 1755519289795190, guid: b7d5192105100fa4ba3f3a2fec0b6089,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d2bd379429265e4788c4c97602d2cf4, type: 2}
