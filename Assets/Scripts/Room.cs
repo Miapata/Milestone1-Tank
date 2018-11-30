@@ -9,7 +9,7 @@ public class Room : MonoBehaviour
     //These are the columns and rows
     public int rows;
     public int cols;
-
+    
     //room width
     private float roomWidth = 10.0f;
     //room height
@@ -17,11 +17,14 @@ public class Room : MonoBehaviour
     //Grid 
     private Room[,] grid;
     //gridPrefabs
+    [Space(5)]
     public GameObject[] gridPrefabs;
     //use for random rotations
     public float[] rotations;
+
     //Spawnpoints 
     public List<GameObject> spawnPoints;
+    [Space(5)]
     //The length of the spwanPOints
     public int wayPointsLength;
 

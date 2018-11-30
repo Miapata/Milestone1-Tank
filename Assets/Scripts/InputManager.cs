@@ -8,6 +8,7 @@ public class InputManager : MonoBehaviour
     public KeyCode right;
     public KeyCode up;
     public KeyCode down;
+    [Space(5)]
     public KeyCode fire;
     public void Player1()
     {

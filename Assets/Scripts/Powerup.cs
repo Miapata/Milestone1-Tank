@@ -13,6 +13,7 @@ public class Powerup : MonoBehaviour
     //rapidFire Gameobject
     public GameObject rapidFireGameObject;
 
+    [Space(5)]
     //respawnTime
     public float respawnTime = 20;
 

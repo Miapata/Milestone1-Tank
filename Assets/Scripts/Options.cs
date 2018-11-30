@@ -4,14 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Options : MonoBehaviour
 {
+    [Space(5)]
     //Music slider
     public Slider musicSlider;
     //Sound effect slider
     public Slider soundFxSlider;
+    [Space(5)]
     //Map of the day toggle
     public Toggle mapOfTheDayToggle;
     //Toggle for multiplayer
     public Toggle multiplayerToggle;
+    [Space(5)]
     //Input field for our seed
     public InputField seedText;
     //Our options panel

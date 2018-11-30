@@ -21,11 +21,13 @@ public class Motor : MonoBehaviour
     // tank data to get the variables
     public TankData tankData;
 
+    [Space(5)]
     //Power up time
     public float powerupTime;
 
     //the powerup
     public Powerup powerup;
+    [Space(5)]
 
     //Player 2
     public bool player2;

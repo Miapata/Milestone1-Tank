@@ -9,6 +9,7 @@ public class TankData : MonoBehaviour
     //Our win screen
     public GameObject winScreen;
 
+    [Space(5)]
     public Text bestScoreText;
 
     public Text scoreText;
@@ -16,6 +17,7 @@ public class TankData : MonoBehaviour
     //Health text
     public Text healthText;
 
+    [Space(5)]
     //Move speed
     public float moveSpeed;
 
@@ -28,6 +30,8 @@ public class TankData : MonoBehaviour
     //Rate of Fire
     public float rateOfFire;
 
+
+    [Space(5)]
     public int score;
 
     private int bestScore;
@@ -35,7 +39,8 @@ public class TankData : MonoBehaviour
     //Ai controller
     public AIController aiController;
 
-
+    
+    public GameObject restartButton;
     private void Start()
     {
         if (transform.root.gameObject.layer == 14)
@@ -69,8 +74,11 @@ public class TankData : MonoBehaviour
         // Check if health is lower than or equal to 0
         if (health <= 0)
         {
-            //Activate the lose screen
-            loseScreen.SetActive(true);
+            if (GetComponent<Motor>().AI == false)
+            {
+                //Activate the lose screen
+                loseScreen.SetActive(true);
+            }
             // Destroy gameObject
             Destroy(transform.root.gameObject);
 
@@ -103,6 +111,17 @@ public class TankData : MonoBehaviour
             bestScoreText.text = "Best:" + bestScore.ToString();
         }
 
+    }
+
+    public void CheckPlayers()
+    {
+        if (GameManager.instance.enemyTankData.Length == 0 && GameManager.instance.tankData.Count == 1)
+        {
+            gameObject.GetComponent<Motor>().enabled = false;
+            winScreen.SetActive(true);
+            bestScoreText.gameObject.transform.parent = winScreen.transform.parent;
+            scoreText.gameObject.transform.parent = winScreen.transform.parent;
+        }
     }
 }
 
