@@ -14,6 +14,8 @@ public class TankData : MonoBehaviour
 
     public Text scoreText;
 
+    public Text livesText;
+
     //Health text
     public Text healthText;
 
@@ -26,6 +28,9 @@ public class TankData : MonoBehaviour
 
     //Health
     public float health;
+
+    //Amount of lives
+    public int lives;
 
     //Rate of Fire
     public float rateOfFire;
@@ -76,7 +81,7 @@ public class TankData : MonoBehaviour
         }
 
         // Check if health is lower than or equal to 0
-        if (health <= 0)
+        if (health <= 0 && lives <= 0)
         {
             if (GetComponent<Motor>().AI == false)
             {
@@ -87,6 +92,11 @@ public class TankData : MonoBehaviour
             Destroy(transform.root.gameObject);
             GameObject tankExplodeSound = Instantiate(GameManager.instance.tankDiedSoundFX, transform.position, Quaternion.identity);
             Destroy(tankExplodeSound, 2f);
+        }
+        else if (health <= 0 && lives > 0)
+        {
+            lives--;
+            GameObject tankExplodeSound = Instantiate(GameManager.instance.tankDiedSoundFX, transform.position, Quaternion.identity);
         }
         //Update our health text to current health
         healthText.text = "Health: " + health.ToString();
