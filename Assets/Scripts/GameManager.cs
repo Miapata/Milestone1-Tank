@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
     public GameObject clickSoundFX;
     public GameObject powerupSoundFX;
     public GameObject tankDiedSoundFX;
-
+    public GameObject mouseDownSoundFX;
     void Awake()
     {
         // Destroy using the singleton pattern

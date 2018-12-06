@@ -1,10 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Sounds : MonoBehaviour
 {
+
     public static Sounds instance;
+    public AudioSource audioPlayer;
+    public AudioClip mouseDown;
+    public AudioClip mouseUp;
     private void Awake()
     {
         if (instance == null)
@@ -17,14 +21,18 @@ public class Sounds : MonoBehaviour
             Destroy(this);
         }
     }
-    
-    //This is our clicking sound effect whenever we press a button
-    public void ClickSoundFX()
-    {
-        GameObject instance = Instantiate(GameManager.instance.clickSoundFX, transform.position, Quaternion.identity);
-        Destroy(instance, 0.3f);
-    }
 
+    public void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            audioPlayer.PlayOneShot(mouseDown, GameManager.instance.soundFXVolume);
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            audioPlayer.PlayOneShot(mouseUp, GameManager.instance.soundFXVolume);
+        }
+    }
 
 
 }

@@ -29,7 +29,7 @@ public class Room : MonoBehaviour
     public int wayPointsLength;
 
     //Navmesh surface to rebake
-    private NavMeshSurface surface;
+  
     //Our waypoint
     private GameObject waypoint;
 
@@ -105,8 +105,7 @@ public class Room : MonoBehaviour
 
                 //Add the spawnpoint to the list from the tile generated
                 spawnPoints.Add(tempRoomObj.transform.GetChild(1).gameObject);
-                surface = tempRoomObj.GetComponent<NavMeshSurface>();
-                surface.BuildNavMesh();
+            
                 // Save it to the grid array
                 grid[j, i] = tempRoom;
                 //Spawn the tanks
